@@ -972,7 +972,11 @@ g_2019 <- ggplot(stats_data, aes(X, Y)) +
 geom_point(aes(colour = Yield_2019),size=3) + scale_colour_gradient(low="orange", high="forestgreen") +
 labs(colour = "Yield (ton/ha)", x="Longitude", y="Latitude", title = "Sample Yield Monitor Data")
 
-grid.arrange(g_2015, g_2016, g_2017, g_2018, g_2019, 
+g_MZ <- ggplot(stats_data, aes(X, Y)) +
+geom_point(aes(colour = ZONE),size=3) + 
+labs(colour = "Yield (ton/ha)", x="Longitude", y="Latitude", title = "Sample Yield Monitor Data")
+
+grid.arrange(g_2015, g_2016, g_2017, g_2018, g_2019, g_MZ,
              ncol = 2, nrow = 3)
 ```
 
