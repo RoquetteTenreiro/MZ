@@ -529,3 +529,68 @@ include_graphics(img6_path)
 ![Image description](4.jpg)
 ![Image description](5.jpg)
 ![Image description](6.jpg)
+
+### 3.2 Upload soil physical and chemical data 
+
+Data collected at 10th October 2019 
+Field location: Guadálcazar, Córdoba, Spain
+
+Four different types of properties:
+1) Soil texture (%Clay, %Sand);
+2) Soil ECa (35 and 85 cm depth);
+3) Slope orientation;
+4) Elevation (m);
+
+```{r}
+# Upload raster data
+GF_Elevation     <- raster("GF_Elevation.tif")
+GF_Orientation   <- raster("GF_Orientation.tif")
+GF_ECa1          <- raster("GF_CEa1.tif")
+GF_ECa2          <- raster("GF_CEa2.tif")
+
+# Convert to point vectorial data
+GF_Elevation_dots <- rasterToPoints(GF_Elevation, spatial = TRUE) %>% st_as_sf()
+names(GF_Elevation_dots)[names(GF_Elevation_dots) == "GF_Elevation"] <- "Elevation"
+GF_Orientation_dots <- rasterToPoints(GF_Orientation, spatial = TRUE) %>% st_as_sf()
+names(GF_Orientation_dots)[names(GF_Orientation_dots) == "GF_Orientation"] <- "Orientation"
+GF_ECa1_dots <- rasterToPoints(GF_ECa1, spatial = TRUE) %>% st_as_sf()
+names(GF_ECa1_dots)[names(GF_ECa1_dots) == "GF_CEa1"] <- "ECa1"
+GF_ECa2_dots <- rasterToPoints(GF_ECa2, spatial = TRUE) %>% st_as_sf()
+names(GF_ECa2_dots)[names(GF_ECa2_dots) == "GF_CEa2"] <- "ECa2"
+```
+
+## 3.3. Join field data and NDVI data on a single shapefile
+
+Here we run a spatial join in order to build a single shapefile containing point based data (10x10m) with plant vigor (NDVI), soil physical properties (elevation, orientation, ECa, texture) and chemical data (pH).
+
+```{r}
+# Start spatial join (NDVI + Elevation + Orientation + ECa)
+rm(MZ_joined)
+MZ_joined = st_join(NDVI_vector_2019.1, NDVI_vector_2019.2["NDVI_2019.2"], join = st_nearest_feature)
+
+MZ_joined = st_join(MZ_joined, NDVI_vector_2018.1["NDVI_2018.1"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, NDVI_vector_2018.2["NDVI_2018.2"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, NDVI_vector_2017.1["NDVI_2017.1"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, NDVI_vector_2017.2["NDVI_2017.2"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, NDVI_vector_2016.1["NDVI_2016.1"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, NDVI_vector_2016.2["NDVI_2016.2"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, NDVI_vector_2015.1["NDVI_2015.1"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, NDVI_vector_2015.2["NDVI_2015.2"], join = st_nearest_feature)
+
+MZ_joined = st_join(MZ_joined, GF_Elevation_dots["Elevation"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, GF_Orientation_dots["Orientation"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, GF_ECa1_dots["ECa1"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, GF_ECa2_dots["ECa2"], join = st_nearest_feature)
+
+# Convert Eca from mS/m to dS/m and estimate ECa mean
+MZ_joined$ECa1     <- MZ_joined$ECa1/100
+MZ_joined$ECa2     <- MZ_joined$ECa2/100
+MZ_joined$EC_mean  <- ((MZ_joined$ECa1+MZ_joined$ECa2)/2)
+
+# A simple classification of soil texture proposed by Greenfields: http://www.greenfield.agrodrone.es/ 
+MZ_joined$Texture  <- "Clay_loamy"
+MZ_joined$Texture[MZ_joined$ECa2 > 0.60]  <- "Clay"
+MZ_joined$Texture[MZ_joined$ECa1 < 0.10]  <- "Clay_loamy"
+tm_shape(MZ_joined) + tm_dots(col = "Texture", palette = "RdYlGn", n=2) + tm_style("cobalt")
+```
+ ![Image description](Texture_Class.jpg)
