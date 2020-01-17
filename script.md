@@ -594,3 +594,55 @@ MZ_joined$Texture[MZ_joined$ECa1 < 0.10]  <- "Clay_loamy"
 tm_shape(MZ_joined) + tm_dots(col = "Texture", palette = "RdYlGn", n=2) + tm_style("cobalt")
 ```
  ![Image description](Texture_Class.jpg)
+
+### 3.4 Soil sampling for pH and %clay mapping
+
+A total of 10 soil samples were collected at 40cm according to a clustering of ECa. Data is spatially interpolated following a 'nearest-feature' algorithm in order to produce point based vectorial maps with the same spatial resolution of MZ_joined.  
+
+```{r}
+# Upload sampling dots
+Sampling_vector <- st_read("Sampling_dots.shp")
+Sampling_map    <- tm_shape(Sampling_vector) + tm_dots(col = "green", palette = "RdYlGn", n=6) + tm_style("cobalt")
+Sampling_map  
+
+# Rename: translating from Spanish to English
+names(Sampling_vector)[names(Sampling_vector) == "ARCILLA"] <- "Clay"
+names(Sampling_vector)[names(Sampling_vector) == "PH"] <- "pH"
+names(Sampling_vector)[names(Sampling_vector) == "ARENA"] <- "Sand"
+```
+
+A few sampling photos
+
+```{r}
+#Define file ath
+img7_path <- "sentinel/R_analysis/Pictures_Sampling/7.png"
+img8_path <- "sentinel/R_analysis/Pictures_Sampling/8.png"
+
+# Display pictures
+include_graphics(img7_path) 
+include_graphics(img8_path) 
+```
+
+![Image description](7.jpg)
+![Image description](8.jpg)
+
+```{r}
+# Spatial join
+MZ_joined = st_join(MZ_joined, Sampling_vector["Clay"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, Sampling_vector["pH"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, Sampling_vector["Sand"], join = st_nearest_feature)
+
+# Map sampling points
+Clay_map <- tm_shape(MZ_joined) + tm_dots(col = "Clay", palette = "YlOrBr", n=8, size = 0.3) #+ tm_style("cobalt") 
+Sand_map <- tm_shape(MZ_joined) + tm_dots(col = "Sand", palette = "Oranges", n=8, size = 0.3) #+ tm_style("cobalt") 
+pH_map   <- tm_shape(MZ_joined) + tm_dots(col = "pH", palette = "Blues", n=5, size = 0.3) #+ tm_style("cobalt")
+
+# Display
+tmap_mode("plot") 
+tmap_arrange(Clay_map,
+             Sand_map,
+             pH_map,
+             ncol=3)
+```
+
+![Image description](Soil_maps.jpg)
