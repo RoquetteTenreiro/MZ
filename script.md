@@ -812,7 +812,6 @@ names(mergedata)[names(mergedata) == "cluster"] <- "ZONE"
 mergedata$ZONE[mergedata$ZONE == "1"] <- "A"
 mergedata$ZONE[mergedata$ZONE == "2"] <- "B"
 mergedata$ZONE[mergedata$ZONE == "3"] <- "C"
-mergedata$ZONE[mergedata$ZONE == "4"] <- "D"
 ```
 ![Image description](K-means.jpg)
 
