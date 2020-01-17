@@ -383,4 +383,105 @@ Which can be (interactively) zoomed in:
 
 ![Image description](Mask_interactive_2019_ZoomIN.jpg)
 
+### 2.9 Display facets 
 
+1) We convert raster data into vectorial point-based data while keeping the same (Landsat-8/Sentinel-2) spatial resolution (30x30m/20x20m). 
+
+2) Use of 'tmap_arrange' to display facets for NDVI vectorial mapping.
+
+```{r}
+# From raster to point 2015
+NDVI_vector_2015.1 <- rasterToPoints(masked_feature_2015.1, spatial = TRUE) %>% st_as_sf()
+NDVI_vector_2015.2 <- rasterToPoints(masked_feature_2015.2, spatial = TRUE) %>% st_as_sf()
+
+# Correct feature name
+names(NDVI_vector_2015.1)[names(NDVI_vector_2015.1) == "layer"] <- "NDVI_2015.1"
+names(NDVI_vector_2015.2)[names(NDVI_vector_2015.2) == "layer"] <- "NDVI_2015.2"
+
+# Create maps for 2015
+NDVI_points_2015.1 <- tm_shape(NDVI_vector_2015.1) + tm_dots(col="NDVI_2015.1", palette="YlGn", n=10) + tm_style("cobalt") + 
+tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_points_2015.2 <- tm_shape(NDVI_vector_2015.2) + tm_dots(col="NDVI_2015.2", palette="YlGn", n=10) + tm_style("cobalt") + 
+  tm_legend(outside = TRUE, text.size = 1.2)
+
+# Display facets
+tmap_arrange(NDVI_points_2015.1,
+             NDVI_points_2015.2,
+             ncol=2)
+             
+# From raster to point 2016
+NDVI_vector_2016.1 <- rasterToPoints(masked_feature_2016.1, spatial = TRUE) %>% st_as_sf()
+NDVI_vector_2016.2 <- rasterToPoints(masked_feature_2016.2, spatial = TRUE) %>% st_as_sf()
+
+# Correct feature name
+names(NDVI_vector_2016.1)[names(NDVI_vector_2016.1) == "layer"] <- "NDVI_2016.1"
+names(NDVI_vector_2016.2)[names(NDVI_vector_2016.2) == "layer"] <- "NDVI_2016.2"
+
+# Create maps for 2016
+NDVI_points_2016.1 <- tm_shape(NDVI_vector_2016.1) + tm_dots(col="NDVI_2016.1", palette="YlGn", n=10) + tm_style("cobalt") + 
+tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_points_2016.2 <- tm_shape(NDVI_vector_2016.2) + tm_dots(col="NDVI_2016.2", palette="YlGn", n=10) + tm_style("cobalt") + 
+  tm_legend(outside = TRUE, text.size = 1.2)
+
+# Display facets
+tmap_arrange(NDVI_points_2016.1,
+             NDVI_points_2016.2,
+             ncol=2)
+
+# From raster to point 2017
+NDVI_vector_2017.1 <- rasterToPoints(masked_feature_2017.1, spatial = TRUE) %>% st_as_sf()
+NDVI_vector_2017.2 <- rasterToPoints(masked_feature_2017.2, spatial = TRUE) %>% st_as_sf()
+
+# Correct feature name
+names(NDVI_vector_2017.1)[names(NDVI_vector_2017.1) == "layer"] <- "NDVI_2017.1"
+names(NDVI_vector_2017.2)[names(NDVI_vector_2017.2) == "layer"] <- "NDVI_2017.2"
+
+# Create maps for 2017
+NDVI_points_2017.1 <- tm_shape(NDVI_vector_2017.1) + tm_dots(col="NDVI_2017.1", palette="YlGn", n=10) + tm_style("cobalt") + 
+tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_points_2017.2 <- tm_shape(NDVI_vector_2017.2) + tm_dots(col="NDVI_2017.2", palette="YlGn", n=10) + tm_style("cobalt") + 
+  tm_legend(outside = TRUE, text.size = 1.2)
+
+# Display facets
+tmap_arrange(NDVI_points_2017.1,
+             NDVI_points_2017.2,
+             ncol=2)
+
+# From raster to point 2018
+NDVI_vector_2018.1 <- rasterToPoints(masked_feature_2018.1, spatial = TRUE) %>% st_as_sf()
+NDVI_vector_2018.2 <- rasterToPoints(masked_feature_2018.2, spatial = TRUE) %>% st_as_sf()
+
+# Correct feature name
+names(NDVI_vector_2018.1)[names(NDVI_vector_2018.1) == "layer"] <- "NDVI_2018.1"
+names(NDVI_vector_2018.2)[names(NDVI_vector_2018.2) == "layer"] <- "NDVI_2018.2"
+
+# Create maps for 2018
+NDVI_points_2018.1 <- tm_shape(NDVI_vector_2018.1) + tm_dots(col="NDVI_2018.1", palette="YlGn", n=10) + tm_style("cobalt") + 
+tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_points_2018.2 <- tm_shape(NDVI_vector_2018.2) + tm_dots(col="NDVI_2018.2", palette="YlGn", n=10) + tm_style("cobalt") + 
+  tm_legend(outside = TRUE, text.size = 1.2)
+
+# Display facets
+tmap_arrange(NDVI_points_2018.1,
+             NDVI_points_2018.2,
+             ncol=2)
+
+# From raster to point 2019
+NDVI_vector_2019.1 <- rasterToPoints(masked_feature_2019.1, spatial = TRUE) %>% st_as_sf()
+NDVI_vector_2019.2 <- rasterToPoints(masked_feature_2019.2, spatial = TRUE) %>% st_as_sf()
+
+# Correct feature name
+names(NDVI_vector_2019.1)[names(NDVI_vector_2019.1) == "layer"] <- "NDVI_2019.1"
+names(NDVI_vector_2019.2)[names(NDVI_vector_2019.2) == "layer"] <- "NDVI_2019.2"
+
+# Create maps for 2019
+NDVI_points_2019.1 <- tm_shape(NDVI_vector_2019.1) + tm_dots(col="NDVI_2019.1", palette="YlGn", n=10) + tm_style("cobalt") + 
+tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_points_2019.2 <- tm_shape(NDVI_vector_2019.2) + tm_dots(col="NDVI_2019.2", palette="YlGn", n=10) + tm_style("cobalt") + 
+  tm_legend(outside = TRUE, text.size = 1.2)
+
+# Display facets
+tmap_arrange(NDVI_points_2019.1,
+             NDVI_points_2019.2,
+             ncol=2)
+```
