@@ -45,7 +45,6 @@ install.packages("tinytex")
 and updating all the installed libraries in R-studio.
 
 ```{r}
-
 library(knitr)
 library(sf)
 library(dplyr)  
@@ -70,5 +69,15 @@ library(ggpmisc)
 library(markdown)
 library(tinytex)
 library(lmtest)
+```
 
+### Initial details - working directory
+
+In this section we set initial details to specify the working directory; in this particular case the analysis was linked to the internal folder "Experimental_Catchment_Cordoba_19_20" where input and output data is saved. To run this code please specify the working directory where your input files are saved. 
+
+```{r setup, include=FALSE}
+rm(list=ls())
+getwd()
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "C:/Users/Tomas R. Tenreiro/Desktop/Experimental_Catchment_Cordoba_19_20")
 ```
