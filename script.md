@@ -193,7 +193,7 @@ NDVI_2019.2_map <- tm_shape(NDVI_2019.2) + tm_raster(palette="YlGn",n=5) + tm_le
 
 ### 2.4 Visualize NDVI raster maps 
 
-First for 2015 ('ncol' means the number of columns up to a maximum limit of 4 features)
+First for 2015 ('ncol' means the number of columns up to a maximum limit of 4 features):
 
 ```{r}
 tmap_arrange(NDVI_2015.1_map, 
@@ -205,23 +205,34 @@ tmap_arrange(NDVI_2015.1_map,
 For the remaining years:
 
 ```{r}
-#2016
+# 2016
 tmap_arrange(NDVI_2016.1_map, 
              NDVI_2016.2_map, 
              ncol=2)
              
-#2017
+# 2017
 tmap_arrange(NDVI_2017.1_map, 
              NDVI_2017.2_map, 
              ncol=2)
              
-#2018
+# 2018
 tmap_arrange(NDVI_2018.1_map, 
              NDVI_2018.2_map, 
              ncol=2)
 
-#2019
+# 2019
 tmap_arrange(NDVI_2019.1_map, 
              NDVI_2019.2_map, 
              ncol=2)
 ```
+
+### Upload the field vector for clip operations
+
+The field vector selected should be the shapefile polygon of the field. In this particular case, the shapefile was obtained with QGIS considering a topographic characterization of the selected catchment. The catchment was spatially defined according to a map of flow directions (raster) obtained with the SAGA - Wang & Liu algorithm. The algorithm defines water flow and hillshades orientation in a particular area of interest from a DEM. We used a DEM with 5m spatial resolution obtained with LiDAR from CNIG (http://centrodedescargas.cnig.es/CentroDescargas/index.jsp). From that information, a catchment was isolated with an area of approximately 9.5 ha.
+
+```{r}
+# Upload field vector
+field_vector <- st_read("sentinel/R_analysis/Field_vector.shp")
+plot (field_vector$geometry)
+```
+![Image description](ShapePOLYGON.jpg)
