@@ -310,6 +310,17 @@ plot(masked_feature_2019.1)
 masked_feature_2019.2 = mask(NDVI_2019.2, field_vector)
 plot(masked_feature_2019.2)
 ```
+As an example, the following two figures represent respectively, from left to right, a crop feature and a mask feature, both obtained from 2019.2 satellite imagery:
 
 ![Image description](Crop-Mask.jpg)
+
+### 2.7 Visualization mode: Interactive (view) vs. Static (plot) viewing 
+
+Here we provide the basic comand to select interactive (or static) viewing mode of outcomes. 
+If you want to get back to the "static" mode please switch 'view' by 'plot' in the function term 'tmap_mode()'
+
+```{r}
+tmap_mode("view") 
+# or tmap_mode("plot") instead
+```
 
