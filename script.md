@@ -16,7 +16,7 @@ The following R-script aims to describe an analytical procedure that combined mu
 
 ### Necessary material - R libraries    
 
-The first step consists on updating all necessary libraries for this analysis. 
+The first step consists on installing all necessary libraries for this analysis: 
 
 ```{r}
 install.packages("rmarkdown")
@@ -41,4 +41,34 @@ install.packages("knitr")
 install.packages("installr")
 install.packages("lmtest", repos = "http://cran.us.r-project.org")
 install.packages("tinytex")
+```
+and updating all the installed libraries in R-studio.
+
+```{r}
+
+library(knitr)
+library(sf)
+library(dplyr)  
+library(plyr)
+library(reshape2)
+library(agricolae)
+library(quantreg)
+library(plotly)
+library(sp)
+library(spDataLarge)
+library(spData)
+library(tmap)
+library(raster)
+library(gridExtra)
+library(quantreg)
+library(ggplot2)
+library(RColorBrewer)
+library(tidyverse)
+library(gridExtra)
+library(wesanderson)
+library(ggpmisc)
+library(markdown)
+library(tinytex)
+library(lmtest)
+
 ```
