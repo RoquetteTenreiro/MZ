@@ -982,4 +982,53 @@ grid.arrange(g_2015, g_2016, g_2017, g_2018, g_2019, g_MZ,
 
 ![Image description](CoordMaps_Geo_stats.jpg)
 
+
+
+```{r}
+## Variograms
+Yield_2015.var <- variogram(Yield_2015~1,
+locations=~X+Y,
+data=stats_data)
+plot(Yield_2015.var)
+
+Yield_2016.var <- variogram(Yield_2016~1,
+locations=~X+Y,
+data=stats_data)
+plot(Yield_2016.var)
+
+Yield_2017.var <- variogram(Yield_2017~1,
+locations=~X+Y,
+data=stats_data)
+plot(Yield_2017.var)
+
+Yield_2018.var <- variogram(Yield_2018~1,
+locations=~X+Y,
+data=stats_data)
+plot(Yield_2018.var)
+
+Yield_2019.var <- variogram(Yield_2019~1,
+locations=~X+Y,
+data=stats_data)
+plot(Yield_2019.var)
+
+#vgm(psill = NA, model, range = NA, nugget, add.to, anis, kappa = 0.5, covtable, Err = 0)
+
+print(Yield_2015.vgm <- fit.variogram(Yield_2015.var, vgm(0.02,"Sph",100,0)))
+plot(Yield_2015.var, model=Yield_2015.vgm)
+
+print(Yield_2016.vgm <- fit.variogram(Yield_2016.var, vgm(0.02,"Sph",100,0)))
+plot(Yield_2016.var, model=Yield_2016.vgm)
+
+print(Yield_2017.vgm <- fit.variogram(Yield_2017.var, vgm(0.02,"Sph",100,0)))
+plot(Yield_2017.var, model=Yield_2017.vgm)
+
+print(Yield_2018.vgm <- fit.variogram(Yield_2018.var, vgm(0.02,"Sph",100,0)))
+plot(Yield_2018.var, model=Yield_2018.vgm)
+
+print(Yield_2019.vgm <- fit.variogram(Yield_2019.var, vgm(0.02,"Sph",100,0)))
+plot(Yield_2019.var, model=Yield_2019.vgm)
+```
+
+![Image description](Variograms_Yield.jpg)
+
              
