@@ -324,3 +324,58 @@ tmap_mode("view")
 # or tmap_mode("plot") instead
 ```
 
+### 2.8 Interactive mapping of masked NDVI rasters
+
+To define the maps:
+
+```{r}
+# For 2015
+masked_2015.1 <- tm_shape(masked_feature_2015.1) + tm_raster(palette="YlGn",n=10, title="NDVI_05.06.2015") + tm_legend(outside = TRUE, text.size = 1.2)
+masked_2015.2 <- tm_shape(masked_feature_2015.2) + tm_raster(palette="YlGn",n=10, title="NDVI_07.07.2015") + tm_legend(outside = TRUE, text.size = 1.2)
+
+# For 2016
+masked_2016.1 <- tm_shape(masked_feature_2016.1) + tm_raster(palette="YlGn",n=10, title="NDVI_07.06.2016") + tm_legend(outside = TRUE, text.size = 1.2)
+masked_2016.2 <- tm_shape(masked_feature_2016.2) + tm_raster(palette="YlGn",n=10, title="NDVI_23.06.2016") + tm_legend(outside = TRUE, text.size = 1.2)
+
+# For 2017
+masked_2017.1 <- tm_shape(masked_feature_2017.1) + tm_raster(palette="YlGn",n=10, title="NDVI_10.06.2017") + tm_legend(outside = TRUE, text.size = 1.2)
+masked_2017.2 <- tm_shape(masked_feature_2017.2) + tm_raster(palette="YlGn",n=10, title="NDVI_26.06.2017") + tm_legend(outside = TRUE, text.size = 1.2)
+
+# For 2018
+masked_2018.1 <- tm_shape(masked_feature_2018.1) + tm_raster(palette="YlGn",n=10, title="NDVI_22.05.2018") + tm_legend(outside = TRUE, text.size = 1.2)
+masked_2018.2 <- tm_shape(masked_feature_2018.2) + tm_raster(palette="YlGn",n=10, title="NDVI_03.06.2018") + tm_legend(outside = TRUE, text.size = 1.2)
+
+# For 2019
+masked_2019.1 <- tm_shape(masked_feature_2019.1) + tm_raster(palette="YlGn",n=10, title="NDVI_14.04.2019") + tm_legend(outside = TRUE, text.size = 1.2)
+masked_2019.2 <- tm_shape(masked_feature_2019.2) + tm_raster(palette="YlGn",n=10, title="NDVI_27.04.2019") + tm_legend(outside = TRUE, text.size = 1.2)
+```
+
+To print them:
+
+```{r}
+# For 2015
+tmap_arrange(masked_2015.1,
+             masked_2015.2,
+             ncol=2)
+# For 2016             
+tmap_arrange(masked_2016.1,
+             masked_2016.2,
+             ncol=2)
+# For 2017             
+tmap_arrange(masked_2017.1,
+             masked_2017.2,
+             ncol=2)
+# For 2018
+tmap_arrange(masked_2018.1,
+             masked_2018.2,
+             ncol=2) 
+# For 2019
+tmap_arrange(masked_2019.1,
+             masked_2019.2,
+             ncol=2)
+```
+
+As an example, check the outcome for 2019:
+
+![Image description](Mask_interactive_2019.jpg)
+
