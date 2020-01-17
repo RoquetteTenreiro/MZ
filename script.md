@@ -749,7 +749,7 @@ We observe that NDVI data are clustered for the first principal component, which
 
 ### 4.2 Build dataframe for k-means clustering
 
-In this step we build a sub dataframe for clustering and we check the optimal amount of clusters with two methods conducted on scaled data. For more information, please check the following references:
+In this step we build a sub dataframe for clustering and we check the optimal amount of clusters (k=3) with two methods conducted on scaled data. For more information, please check the following references:
 
 - Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. J. Comput.
 Appl. Math., 20:53–65.
@@ -773,3 +773,102 @@ fviz_nbclust(data.scale, kmeans, method = "gap_stat")+
 ```
 
 ![Image description](Silhouette_Gap.jpg)
+
+### 4.3 Unsupervised k-means clustering
+
+Upload libraries and apply k-means to the dataset; please do not forget to scale your data.
+
+``` {r}
+library(dplyr)
+library(tidyverse) # data manipulation
+library(corrplot)
+library(gridExtra)
+library(GGally)
+library(cluster) # clustering algorithms 
+library(factoextra) 
+
+rm(data_1)
+data_1 <- data.scale
+df.1 <- data
+data.scale_1 <- data_1
+
+rm(cluster)
+set.seed(125)
+cluster <- kmeans(data.scale_1, 3)
+df.1$cluster <- cluster$cluster
+
+# Plot the cluster
+fviz_cluster(cluster, data = df.1)
+
+# Add clusters to spatial data
+rm(mergedata)
+df.1 <- df.1[c(7,8)]
+mergedata <- merge(x = MZ_joined, y = df.1, by = "ID")
+
+# Recall data
+names(mergedata)[names(mergedata) == "cluster"] <- "ZONE"
+
+# Prepare map
+mergedata$ZONE[mergedata$ZONE == "1"] <- "A"
+mergedata$ZONE[mergedata$ZONE == "2"] <- "B"
+mergedata$ZONE[mergedata$ZONE == "3"] <- "C"
+mergedata$ZONE[mergedata$ZONE == "4"] <- "D"
+```
+Get yield maps from modelling simulations 
+
+```{r}
+# Simulated Yield maps from NDVI
+
+# For canola 2019
+mergedata$Yield_2019 <- 0
+HI = 0.2
+mergedata$Yield_2019 <- (5738.5 * (mergedata$NDVI_2019^2) - (3109.4 * mergedata$NDVI_2019) + 385.77) * 10000 / 1000 * HI / 1000 
+
+# For wheat 2018
+mergedata$Yield_2018 <- 0
+mergedata$Yield_2018 <- ((-83.49*(mergedata$NDVI_2018^3))+(127.82*(mergedata$NDVI_2018^2))+(-49.975*(mergedata$NDVI_2018))+6.975)
+mergedata$Yield_2018[mergedata$Yield_2018<0] <- 0
+
+# For sunflower 2017
+mergedata$Yield_2017 <- 0
+mergedata$Yield_2017 <- (3.6115*mergedata$NDVI_2017)-0.5071
+mergedata$Yield_2017[mergedata$Yield_2017<0] <- 0
+
+# For wheat 2016
+mergedata$Yield_2016 <- 0
+mergedata$Yield_2016 <- ((-83.49*(mergedata$NDVI_2016^3))+(127.82*(mergedata$NDVI_2016^2))+(-49.975*(mergedata$NDVI_2016))+6.975)
+mergedata$Yield_2016[mergedata$Yield_2016<0] <- 0
+
+# For sunflower 2015
+mergedata$Yield_2015 <- 0
+mergedata$Yield_2015 <- (3.6115*mergedata$NDVI_2015)-0.5071
+mergedata$Yield_2015[mergedata$Yield_2015<0] <- 0
+```
+
+Map your results:
+
+```{r}
+# Define Management Zones map
+mycols <- c("#3CB371", "#7B68EE", "#FFA07A", "#FFD700")
+map_MZ             <- tm_shape(mergedata) + tm_dots(col = "ZONE", palette = mycols, n=5) + tm_style("cobalt") 
+
+# Define Yield maps
+map_Yield.2015      <- tm_shape(mergedata) + tm_dots(col = "Yield_2015", palette = "RdYlGn", n=6) + tm_style("cobalt") 
+map_Yield.2016      <- tm_shape(mergedata) + tm_dots(col = "Yield_2016", palette = "RdYlGn", n=6) + tm_style("cobalt") 
+map_Yield.2017      <- tm_shape(mergedata) + tm_dots(col = "Yield_2017", palette = "RdYlGn", n=2) + tm_style("cobalt") 
+map_Yield.2018      <- tm_shape(mergedata) + tm_dots(col = "Yield_2018", palette = "RdYlGn", n=6) + tm_style("cobalt") 
+map_Yield.2019      <- tm_shape(mergedata) + tm_dots(col = "Yield_2019", palette = "RdYlGn", n=6) + tm_style("cobalt") 
+
+
+# Display facets (units are expressed in ton/ha)
+
+tmap_arrange(map_MZ,
+             map_Yield.2015,
+             map_Yield.2016,
+             map_Yield.2017,
+             ncol=4)
+
+tmap_arrange(map_Yield.2018,
+             map_Yield.2019,
+             ncol=4)
+```
