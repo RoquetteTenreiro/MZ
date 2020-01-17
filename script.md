@@ -1031,4 +1031,4 @@ plot(Yield_2019.var, model=Yield_2019.vgm)
 
 ![Image description](Variograms_Yield.jpg)
 
-Most of the years fitted into variograms with 'monotonic increasing  slope', which indicates that yield was spatially dependent or autocorrelated (for a Lag distance of aprox. 80-120m). All years except 2018, fit into a variogram that reaches an upper bound after the initial slope. For 2018, we obtained one 'unbounded variogram' with a Lag distance > 280m, indicating that the correlation range is larger than the distance. This might indicate that our plot is too small for an accurate analysis of spatial variation in 2018.              
+Most of the years fitted into variograms with 'monotonic increasing  slope', which indicates that yield was spatially dependent or autocorrelated (for a Lag distance of aprox. 80-120m). All years, except 2018, fit into a variogram that reaches an upper bound after the initial slope. For 2018, we obtained one 'unbounded variogram' with a Lag distance > 280m, indicating that the correlation range is larger than the distance. This might indicate that our plot is too small for an accurate analysis of spatial variation in 2018.              
