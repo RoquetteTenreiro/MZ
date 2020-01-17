@@ -311,5 +311,5 @@ masked_feature_2019.2 = mask(NDVI_2019.2, field_vector)
 plot(masked_feature_2019.2)
 ```
 
-
+![Image description](Crop-Mask.jpg)
 
