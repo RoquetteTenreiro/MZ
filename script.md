@@ -499,3 +499,33 @@ For more info in regard to ECa sensing/mapping please read:
 - Johnson, C. K., Doran, J. W., Duke, H. R., Wienhold, B. J., Eskridge, K. M., & Shanahan, J. F. (2001). Field-scale electrical conductivity mapping for delineating soil condition. Soil Science Society of America Journal, 65(6), 1829-1837.
 
 - McCutcheon, M. C., Farahani, H. J., Stednick, J. D., Buchleiter, G. W., & Green, T. R. (2006). Effect of soil water on apparent soil electrical conductivity and texture relationships in a dryland field. Biosystems Engineering, 94(1), 19-32.
+
+```{r}
+# Upload libraries 'imager' and 'png'
+library(knitr)    # For knitting document and include_graphics function
+library(ggplot2)  # For plotting
+library(png)      # For grabbing the dimensions of png files
+
+#Define file ath
+img1_path <- "sentinel/R_analysis/Pictures_Sampling/1.png"
+img2_path <- "sentinel/R_analysis/Pictures_Sampling/2.png"
+img3_path <- "sentinel/R_analysis/Pictures_Sampling/3.png"
+img4_path <- "sentinel/R_analysis/Pictures_Sampling/4.png"
+img5_path <- "sentinel/R_analysis/Pictures_Sampling/3.png"
+img6_path <- "sentinel/R_analysis/Pictures_Sampling/4.png"
+
+# Display pictures
+include_graphics(img1_path) 
+include_graphics(img2_path) 
+include_graphics(img3_path) 
+include_graphics(img4_path) 
+include_graphics(img5_path) 
+include_graphics(img6_path) 
+```
+
+![Image description](1.jpg)
+![Image description](2.jpg)
+![Image description](3.jpg)
+![Image description](4.jpg)
+![Image description](5.jpg)
+![Image description](6.jpg)
