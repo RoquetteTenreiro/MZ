@@ -674,25 +674,18 @@ cv_NDVI_2015.2 = cv(MZ_joined$NDVI_2015.2)
 
 Printed results:
 
-| Variable | CV|
-|----------|---|
-|Clay   | 6.65%|
-|Sand| 25.97%|
+| Variable | CV| Variable | CV |
+|----------|---|----------|----|
 |pH | 3.32%|
-|ECa1 | 39.38%|
-|ECa2 | 26.77%|
-|Orientation | 61.83 %|
-|Elevation |4.86%|
-|NDVI_2019.1 | 13.16%|
-|NDVI_2019.2 | 11.97%|
-|NDVI_2018.1 | 16.53%|
-|NDVI_2018.2 | 18.01%|
-|NDVI_2017.1 | 10.08%|
-|NDVI_2017.2 | 11.13%|
-|NDVI_2016.1 | 10.21%|
-|NDVI_2016.2 | 7.47%|
-|NDVI_2015.1 | 13.99%|
-|NDVI_2015.2 | 10.68%|
+|Clay   | 6.65%| Sand| 25.97%|
+|Orientation | 61.83 %|Elevation |4.86%|
+|ECa1 | 39.38%||ECa2 | 26.77%|
+|NDVI_2019.1 | 13.16%|NDVI_2019.2 | 11.97%|
+|NDVI_2018.1 | 16.53%|NDVI_2018.2 | 18.01%|
+|NDVI_2017.1 | 10.08%|NDVI_2017.2 | 11.13%|
+|NDVI_2016.1 | 10.21%|NDVI_2016.2 | 7.47%|
+|NDVI_2015.1 | 13.99%|NDVI_2015.2 | 10.68%|
+
 
 According to Oliver. (2010), we consider as low, medium or high CV all values, respectively, ranged below 10%, between 10 and 25% and above 25%. 
 
