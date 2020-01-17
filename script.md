@@ -671,6 +671,7 @@ cv_NDVI_2015.2 = cv(MZ_joined$NDVI_2015.2)
 ```
 
 Printed results:
+
 | Variable | CV|
 |----------|---|
 |Clay   | 6.65%|
