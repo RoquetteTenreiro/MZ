@@ -226,7 +226,7 @@ tmap_arrange(NDVI_2019.1_map,
              ncol=2)
 ```
 
-### Upload the field vector for clip operations
+### 2.5 Upload the field vector for clip operations
 
 The field vector selected should be the shapefile polygon of the field. In this particular case, the shapefile was obtained with QGIS considering a topographic characterization of the selected catchment. The catchment was spatially defined according to a map of flow directions (raster) obtained with the SAGA - Wang & Liu algorithm. The algorithm defines water flow and hillshades orientation in a particular area of interest from a DEM. We used a DEM with 5m spatial resolution obtained with LiDAR from CNIG (http://centrodedescargas.cnig.es/CentroDescargas/index.jsp). From that information, a catchment was isolated with an area of approximately 9.5 ha.
 
@@ -236,3 +236,80 @@ field_vector <- st_read("sentinel/R_analysis/Field_vector.shp")
 plot (field_vector$geometry)
 ```
 ![Image description](ShapePOLYGON.jpg)
+
+In this step it is also important to check whether the coordinate system is the same as of satellite imagery; in this particular case we will work with the system WGS84 EPSG 4326. [1] "+proj=longlat +datum=WGS84 +no_defs" CRS arguments: +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+
+```{r}
+# Check coordinate system
+crs(field_vector)
+crs(NDVI_2016.1) # as an example to check coordinate system of rasters
+```
+
+### 2.6 Cropping and Masking tools
+
+In the following section the script crops and masks the NDVI maps by the field vector shapefile. For more info about these functions please check the outcome and have a look at the following link "https://rpubs.com/ricardo_ochoa/416711"
+
+```{r}
+# Crop NDVI data 2015
+cropped_feature_2015.1 = crop(NDVI_2015.1, field_vector)
+plot (cropped_feature_2015.1)
+cropped_feature_2015.2 = crop(NDVI_2015.2, field_vector)
+plot (cropped_feature_2015.2)
+
+# Mask NDVI data 2015
+masked_feature_2015.1 = mask(NDVI_2015.1, field_vector)
+plot(masked_feature_2015.1)
+masked_feature_2015.2 = mask(NDVI_2015.2, field_vector)
+plot(masked_feature_2015.2)
+
+# Crop NDVI data 2016
+cropped_feature_2016.1 = crop(NDVI_2016.1, field_vector)
+plot (cropped_feature_2016.1)
+cropped_feature_2016.2 = crop(NDVI_2016.2, field_vector)
+plot (cropped_feature_2016.2)
+
+# Mask NDVI data 2016
+masked_feature_2016.1 = mask(NDVI_2016.1, field_vector)
+plot(masked_feature_2016.1)
+masked_feature_2016.2 = mask(NDVI_2016.2, field_vector)
+plot(masked_feature_2016.2)
+
+# Crop NDVI data 2017
+cropped_feature_2017.1 = crop(NDVI_2017.1, field_vector)
+plot (cropped_feature_2017.1)
+cropped_feature_2017.2 = crop(NDVI_2017.2, field_vector)
+plot (cropped_feature_2017.2)
+
+# Mask NDVI data 2017
+masked_feature_2017.1 = mask(NDVI_2017.1, field_vector)
+plot(masked_feature_2017.1)
+masked_feature_2017.2 = mask(NDVI_2017.2, field_vector)
+plot(masked_feature_2017.2)
+
+# Crop NDVI data 2018
+cropped_feature_2018.1 = crop(NDVI_2018.1, field_vector)
+plot (cropped_feature_2018.1)
+cropped_feature_2018.2 = crop(NDVI_2018.2, field_vector)
+plot (cropped_feature_2018.2)
+
+# Mask NDVI data 2018
+masked_feature_2018.1 = mask(NDVI_2018.1, field_vector)
+plot(masked_feature_2018.1)
+masked_feature_2018.2 = mask(NDVI_2018.2, field_vector)
+plot(masked_feature_2018.2)
+
+# Crop NDVI data 2019
+cropped_feature_2019.1 = crop(NDVI_2019.1, field_vector)
+plot (cropped_feature_2019.1)
+cropped_feature_2019.2 = crop(NDVI_2019.2, field_vector)
+plot (cropped_feature_2019.2)
+
+# Mask NDVI data 2019
+masked_feature_2019.1 = mask(NDVI_2019.1, field_vector)
+plot(masked_feature_2019.1)
+masked_feature_2019.2 = mask(NDVI_2019.2, field_vector)
+plot(masked_feature_2019.2)
+```
+
+
+
