@@ -738,6 +738,22 @@ data.pca$rotation
 
 We observe that NDVI data are clustered for the first principal component, which explains about 28% of total variation, in two separate groups: wheat and sunflower + canola. Apparently, crops vigor might co-variate with geophysical properties in similar forms according to these two groups, highlighting the crop type effect on spatial correlations. All variables were analysed according to the PC-scores. The PC-scores were calculated as the sum of modules of each of the two principal components (capable to explain about 47% of total variation within the field). We aim to identify the highest correlations by selecting variables that are defined by the largest (and similar) space vectors within the PCA plot. These are the variables that reveal the largest co-variation within the field. We proceed to select all variables with PC-scores higher than 0.5 for the two principal components. 
 
+| Variable	| PC1	| PC2	| Module-PC1 |Module-PC2|	PC-score | Water stress |	Crop |
+|-----------|-----|-----|------------|----------|----------|--------------|------|
+|Elevation	| 0.246073496	|-0.506219	|0.246073496	|0.506219	|0.752292496 |		|
+|Orientation|	-0.275479193	| -0.0846252 |	0.275479193	| 0.0846252	| 0.360104393	|	|
+|ECa1	|-0.395116982	|0.116692|	0.395116982	|0.116692|	0.511808982		||
+	|ECa2|	-0.318056254|	-0.0449851|	0.318056254|	0.0449851	|0.363041354	|	|
+|Clay	|-0.420774692|	-0.1664644|	0.420774692	|0.1664644|	0.587239092		||
+|pH	|-0.404608422|	0.2629256|	0.404608422|	0.2629256|	0.667534022		||
+|Sand	0.352315578|	0.0992921	|0.352315578	|0.0992921	|0.451607678		||
+|NDVI	2019|	-0.020251927|	0.3492063	|0.020251927|	0.3492063|	0.369458227	|0.46	|Canola|
+| NDVI	2018	| 0.246998629|	0.1780563|	0.246998629|	0.1780563	|0.425054929	|0.06	|Wheat|
+|	NDVI 2017|	-0.003134472	|0.511726	|0.003134472	|0.511726|	0.514860472	|0.29	Sunflower|
+|NDVI	2016|	0.281983167|	0.3287212	|0.281983167|	0.3287212	|0.610704367|	0.27	|Wheat|
+|NDVI	2015|	0.021294623	|0.3011159	|0.021294623	|0.3011159	|0.322410523|	0.47	|Sunflower|
+
+
 ### 4.2 Build dataframe for k-means clustering
 
 In this step we build a sub dataframe for clustering and we check the optimal amount of clusters with two methods conducted on scaled data. For more information, please check the following references:
