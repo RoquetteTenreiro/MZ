@@ -6,7 +6,7 @@
 
 > Institute for Sustainable Agriculture (IAS-CSIC) - Córdoba, 2020
 
-#### 1. Get started
+## 1. First steps
 ### 1.1 R-Markdown script
 
 This is an R-Markdown script presentation. R-Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R-Markdown see <http://rmarkdown.rstudio.com>. This document includes both general instructions and comments by the author as well as the script code developed and the output of any embedded R code chunks within this document.
@@ -83,7 +83,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = "C:/Users/Tomas R. Tenreiro/Desktop/Experimental_Catchment_Cordoba_19_20")
 ```
 
-#### 2 Historical remote sensing data
+## 2 Historical remote sensing data
 
 ### 1.1 Input material
 
