@@ -814,7 +814,9 @@ mergedata$ZONE[mergedata$ZONE == "2"] <- "B"
 mergedata$ZONE[mergedata$ZONE == "3"] <- "C"
 mergedata$ZONE[mergedata$ZONE == "4"] <- "D"
 ```
-Get yield maps from modelling simulations 
+![Image description](K-means.jpg)
+
+Get yield maps from modelling simulations:
 
 ```{r}
 # Simulated Yield maps from NDVI
@@ -872,3 +874,5 @@ tmap_arrange(map_Yield.2018,
              map_Yield.2019,
              ncol=4)
 ```
+
+![Image description](MZ_Yields.jpg)
