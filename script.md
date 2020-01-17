@@ -385,7 +385,7 @@ Which can be (interactively) zoomed in:
 
 ### 2.9 Display facets 
 
-1) We convert raster data into vectorial point-based data while keeping the same (Landsat-8/Sentinel-2) spatial resolution (30x30m/20x20m). 
+1) We convert raster data into vectorial point-based data while keeping the same (Landsat-8/Sentinel-2) spatial resolution (30x30m/10x10m). 
 
 2) Use of 'tmap_arrange' to display facets for NDVI vectorial mapping.
 
@@ -488,3 +488,14 @@ tmap_arrange(NDVI_points_2019.1,
 
 ![Image description](Facets_2019.jpg)
 
+## 3 Geo-spatial analysis of field data
+
+### 3.1 Display sampling and ECa measuring photos
+
+Some photos of the measures taken with a Dualem sensor (i.e. electromagnetic induction sensor), spatial resolution of 1x15m. Soil ECa was measured at 35 and 85 cm depth before sowing and a few days after a rainfall event of aprox. 10 mm. Soil samples were also collected to estimate pH and clay content. 
+
+For more info in regard to ECa sensing/mapping please read:
+
+- Johnson, C. K., Doran, J. W., Duke, H. R., Wienhold, B. J., Eskridge, K. M., & Shanahan, J. F. (2001). Field-scale electrical conductivity mapping for delineating soil condition. Soil Science Society of America Journal, 65(6), 1829-1837.
+
+- McCutcheon, M. C., Farahani, H. J., Stednick, J. D., Buchleiter, G. W., & Green, T. R. (2006). Effect of soil water on apparent soil electrical conductivity and texture relationships in a dryland field. Biosystems Engineering, 94(1), 19-32.
