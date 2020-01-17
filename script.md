@@ -614,7 +614,7 @@ names(Sampling_vector)[names(Sampling_vector) == "ARENA"] <- "Sand"
 A few sampling photos
 
 ```{r}
-#Define file ath
+#Define file path
 img7_path <- "sentinel/R_analysis/Pictures_Sampling/7.png"
 img8_path <- "sentinel/R_analysis/Pictures_Sampling/8.png"
 
@@ -646,3 +646,48 @@ tmap_arrange(Clay_map,
 ```
 
 ![Image description](Soil_maps.jpg)
+
+```{r}
+# Estimate CV
+cv_Clay      = cv(MZ_joined$Clay)
+cv_Sand      = cv(MZ_joined$Sand)
+cv_pH        = cv(MZ_joined$pH)
+
+cv_ECa1      = cv(MZ_joined$ECa1)
+cv_ECa2      = cv(MZ_joined$ECa2)
+cv_O         = cv(MZ_joined$Orientation)
+cv_E         = cv(MZ_joined$Elevation)
+
+cv_NDVI_2019.1 = cv(MZ_joined$NDVI_2019.1)
+cv_NDVI_2019.2 = cv(MZ_joined$NDVI_2019.2)
+cv_NDVI_2018.1 = cv(MZ_joined$NDVI_2018.1)
+cv_NDVI_2018.2 = cv(MZ_joined$NDVI_2018.2)
+cv_NDVI_2017.1 = cv(MZ_joined$NDVI_2017.1)
+cv_NDVI_2017.2 = cv(MZ_joined$NDVI_2017.2)
+cv_NDVI_2016.1 = cv(MZ_joined$NDVI_2016.1)
+cv_NDVI_2016.2 = cv(MZ_joined$NDVI_2016.2)
+cv_NDVI_2015.1 = cv(MZ_joined$NDVI_2015.1)
+cv_NDVI_2015.2 = cv(MZ_joined$NDVI_2015.2)
+```
+
+Printed results:
+| Variable | CV|
+|----------|---|
+|Clay   | 6.65%|
+|Sand| 25.97%|
+|pH | 3.32%|
+|ECa1 | 39.38%|
+|ECa2 | 26.77%|
+|Orientation | 61.83 %|
+|Elevation |4.86%|
+|NDVI_2019.1 | 13.16%|
+|NDVI_2019.2 | 11.97%|
+|NDVI_2018.1 | 16.53%|
+|NDVI_2018.2 | 18.01%|
+|NDVI_2017.1 | 10.08%|
+|NDVI_2017.2 | 11.13%|
+|NDVI_2016.1 | 10.21%|
+|NDVI_2016.2 | 7.47%|
+|NDVI_2015.1 | 13.99%|
+|NDVI_2015.2 | 10.68%|
+
