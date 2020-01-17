@@ -193,7 +193,7 @@ NDVI_2019.2_map <- tm_shape(NDVI_2019.2) + tm_raster(palette="YlGn",n=5) + tm_le
 
 ## Visualize NDVI raster maps 
 
-First for 2015 (ncol means the number of columns up to a maximum limit of 4 features)
+First for 2015 ('ncol' means the number of columns up to a maximum limit of 4 features)
 
 ```{r}
 tmap_arrange(NDVI_2015.1_map, 
@@ -202,3 +202,34 @@ tmap_arrange(NDVI_2015.1_map,
 ```
 ![Image description](NDVI_2015_Satellite.jpg)
 
+For 2016
+
+```{r}
+tmap_arrange(NDVI_2016.1_map, 
+             NDVI_2016.2_map, 
+             ncol=2)
+```
+
+For 2017
+
+```{r}
+tmap_arrange(NDVI_2017.1_map, 
+             NDVI_2017.2_map, 
+             ncol=2)
+```
+
+For 2018
+
+```{r}
+tmap_arrange(NDVI_2018.1_map, 
+             NDVI_2018.2_map, 
+             ncol=2)
+```
+
+For 2019
+
+```{r}
+tmap_arrange(NDVI_2019.1_map, 
+             NDVI_2019.2_map, 
+             ncol=2)
+```
