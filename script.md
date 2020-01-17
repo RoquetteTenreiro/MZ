@@ -379,3 +379,8 @@ As an example, check the outcome for 2019:
 
 ![Image description](Mask_interactive_2019.jpg)
 
+Which can be (interactively) zoomed in: 
+
+![Image description](Mask_interactive_2019_ZoomIN.jpg)
+
+
