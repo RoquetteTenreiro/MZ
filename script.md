@@ -875,3 +875,74 @@ tmap_arrange(map_Yield.2018,
 ```
 
 ![Image description](MZ_Yields.jpg)
+
+### 4.4 Statistical analysis of clustering results
+
+```{r}
+
+rm(stats)
+stats <- mergedata[,c(12,14,18:19,26,28:32)]
+
+## Get LAT-LON coordindates
+
+library(rgdal)
+library(gstat)
+library(lattice)
+library(geoR)
+library(RColorBrewer)
+
+rm(stats_data)
+stats_data <- stats[c(1:11)]
+stats_data$geometry <- NULL
+
+rm(coords)
+coords <- do.call(rbind, st_geometry(mergedata)) %>% 
+    as_tibble() %>% setNames(c("lon","lat"))
+
+stats_data <- cbind(stats_data, coords[,1:2])
+
+stats_data$Y <- stats_data$lat * 111.32 * 1000
+stats_data$X <- stats_data$lon * ((-0.0137*(stats_data$lat^2))-(0.1004*stats_data$lat)+111.49) * 1000
+
+# Aggregate Means
+
+aggregate(stats$Elevation, by=list(stats$ZONE), FUN=mean)
+aggregate(stats$Elevation, by=list(stats$ZONE), FUN=sd)
+
+aggregate(stats$ECa1, by=list(stats$ZONE), FUN=mean)
+aggregate(stats$ECa1, by=list(stats$ZONE), FUN=sd)
+
+aggregate(stats$Clay, by=list(stats$ZONE), FUN=mean)
+aggregate(stats$Clay, by=list(stats$ZONE), FUN=sd)
+
+aggregate(stats$pH, by=list(stats$ZONE), FUN=mean)
+aggregate(stats$pH, by=list(stats$ZONE), FUN=sd)
+
+aggregate(stats$Yield_2015, by=list(stats$ZONE), FUN=mean)
+aggregate(stats$Yield_2015, by=list(stats$ZONE), FUN=sd)
+
+aggregate(stats$Yield_2016, by=list(stats$ZONE), FUN=mean)
+aggregate(stats$Yield_2016, by=list(stats$ZONE), FUN=sd)
+
+aggregate(stats$Yield_2017, by=list(stats$ZONE), FUN=mean)
+aggregate(stats$Yield_2017, by=list(stats$ZONE), FUN=sd)
+
+aggregate(stats$Yield_2018, by=list(stats$ZONE), FUN=mean)
+aggregate(stats$Yield_2018, by=list(stats$ZONE), FUN=sd)
+
+aggregate(stats$Yield_2019, by=list(stats$ZONE), FUN=mean)
+aggregate(stats$Yield_2019, by=list(stats$ZONE), FUN=sd)
+
+```
+
+| Variable/Zone | 	A	| B	| C	| Water stress |
+|---------------|-----|---|---|--------------|
+|Elevation	|177.18 (6.3)	|187.73 (4.6)	|171.27 (5.1)	|
+|ECa1	|0.17(0.05)|	0.09 |(0.04)	|0.17 |(0.05)	|
+|Clay	|47.8 (1.9)|	42.5 (0.8)|	42.5 (1.7)	|
+|pH	|7.16 (0.04)	|6.7 (0.22)|	7 (0.05)	|
+|Yield_2015|	1.03 (0.23)|	1.02 (0.13)	|1.06 (0.14)	|0.47|
+|Yield_2016| 1.66 (0.18)|	2.09 (0.33)	|2.18 (0.51)|	0.27|
+|Yield_2017|	2.01 (0.24)	|1.96 (0.24)	|2.21 (0.19)	|0.29|
+|Yield_2018|	4.28 (0.97)	|5.34 (0.86)	|5.31 (0.85)	|0.06|
+|Yield_2019|	5.65 (1.77)	|4.72 (1.80)	|5.8 (1.46)|	0.46|
