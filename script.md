@@ -139,7 +139,7 @@ Red.2019.2 <- raster("SAT Imagery/Red_27.04.2019.tiff")
 NIR.2019.2 <- raster("SAT Imagery/NIR_27.04.2019.tiff")
 ```
 
-## 2.2 Estimate NDVI 
+### 2.2 Estimate NDVI 
 
 This section estimates NDVI considering that Landsat-8 satellite B4 corresponds to Red wave length and B5 to NIR wave length; Sentinel-2 satellite B4 corresponds to Red wave length and B8 to NIR wave length. Data is in raster format with a spatial resolution of 30x30m (Landsat-8) or 10x10m (Sentinel-2).
 
@@ -164,3 +164,41 @@ NDVI_2018.2 <- (NIR.2018.2 - Red.2018.2) / (NIR.2018.2 + Red.2018.2)
 NDVI_2019.1 <- (NIR.2019.1 - Red.2019.1) / (NIR.2019.1 + Red.2019.1)
 NDVI_2019.2 <- (NIR.2019.2 - Red.2019.2) / (NIR.2019.2 + Red.2019.2)
 ```
+
+### Create maps of NDVI with 'tm_shape' function applied to raster data (tm_raster)
+
+It is important to make sure that we have uploaded the library 'tmap';
+
+```{r}
+# Map NDVI 2015
+NDVI_2015.1_map <- tm_shape(NDVI_2015.1) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_2015.2_map <- tm_shape(NDVI_2015.2) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+
+# Map NDVI 2016
+NDVI_2016.1_map <- tm_shape(NDVI_2016.1) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_2016.2_map <- tm_shape(NDVI_2016.2) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+
+# Map NDVI 2017
+NDVI_2017.1_map <- tm_shape(NDVI_2017.1) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_2017.2_map <- tm_shape(NDVI_2017.2) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+
+# Map NDVI 2016
+NDVI_2018.1_map <- tm_shape(NDVI_2018.1) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_2018.2_map <- tm_shape(NDVI_2018.2) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+
+# Map NDVI 2017
+NDVI_2019.1_map <- tm_shape(NDVI_2019.1) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_2019.2_map <- tm_shape(NDVI_2019.2) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+```
+
+## Visualize NDVI raster maps 
+
+First for 2015 (ncol means the number of columns up to a maximum limit of 4 features)
+
+```{r}
+tmap_arrange(NDVI_2015.1_map, 
+             NDVI_2015.2_map, 
+             ncol=2)
+```
+![Image description](NDVI_2015_Satellite.jpg)
+
