@@ -485,3 +485,6 @@ tmap_arrange(NDVI_points_2019.1,
              NDVI_points_2019.2,
              ncol=2)
 ```
+
+![Image description](Facets_2019.jpg)
+
