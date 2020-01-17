@@ -735,3 +735,41 @@ autoplot(data.pca, colour = 'white', loadings = TRUE, loadings.label = TRUE, loa
 data.pca$rotation
 ```
 ![Image description](PCA.jpg)
+
+# Build dataframe for PCA
+
+In this step we build a sub dataframe for PCA and we check optimal amount of clusters with two methods by scaling data. For more information, please check the following references:
+
+- Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. J. Comput.
+Appl. Math., 20:53–65.
+
+- Tibshirani, R., Walther, G., and Hastie, T. (2001). Estimating the number of clusters in a data set via the gap statistic. J.
+R. Stat. Soc. Series B Stat. Methodol., 63(2):411–423.
+
+```{r}
+
+library(cluster)
+
+data <- dataframe[c(1,3,5:6,10:11,13)]
+data.scale <- scale(data[,c(1:6)])
+
+fviz_nbclust(data.scale, FUN = hcut, method = "wss")
+
+# Elbow method
+fviz_nbclust(data.scale, kmeans, method = "wss") +
+    geom_vline(xintercept = 4, linetype = 2)+
+  labs(subtitle = "Elbow method")
+
+# Silhouette method
+fviz_nbclust(data.scale, kmeans, method = "silhouette")+
+  labs(subtitle = "Silhouette method")
+
+# Gap statistic
+# nboot = 50 to keep the function speedy. 
+# recommended value: nboot= 500 for your analysis.
+# Use verbose = FALSE to hide computing progression.
+
+# Gap statistic
+fviz_nbclust(data.scale, kmeans, method = "gap_stat")+
+  labs(subtitle = "Gap Stat method")
+```
