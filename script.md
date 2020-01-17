@@ -647,6 +647,8 @@ tmap_arrange(Clay_map,
 
 ![Image description](Soil_maps.jpg)
 
+### 3.5 Descriptive statistics - coefficient of variation (CV)
+
 ```{r}
 # Estimate CV
 cv_Clay      = cv(MZ_joined$Clay)
@@ -692,3 +694,38 @@ Printed results:
 |NDVI_2015.1 | 13.99%|
 |NDVI_2015.2 | 10.68%|
 
+According to Oliver. (2010), we consider as low, medium or high CV all values, respectively, ranged below 10%, between 10 and 25% and above 25%. 
+
+- Oliver, M. A. (Ed.). (2010). Geostatistical applications for precision agriculture. Springer Science & Business Media.
+
+## 4 Co-variance and data correlation
+
+### 4.1 Filtering data with Principal Component Analysis
+
+```{r}
+
+install.packages("devtools")
+library(devtools)
+install_github("vqv/ggbiplot")
+library(ggbiplot)
+install.packages("factoextra")
+library(factoextra)
+install.packages("ggfortify")
+library(ggfortify)
+library(cluster)
+
+```
+
+```{r}
+
+install.packages("devtools")
+library(devtools)
+install_github("vqv/ggbiplot")
+library(ggbiplot)
+install.packages("factoextra")
+library(factoextra)
+install.packages("ggfortify")
+library(ggfortify)
+library(cluster)
+
+```
