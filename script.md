@@ -165,9 +165,9 @@ NDVI_2019.1 <- (NIR.2019.1 - Red.2019.1) / (NIR.2019.1 + Red.2019.1)
 NDVI_2019.2 <- (NIR.2019.2 - Red.2019.2) / (NIR.2019.2 + Red.2019.2)
 ```
 
-### Create maps of NDVI with 'tm_shape' function applied to raster data (tm_raster)
+### 2.3 Create maps of NDVI 
 
-It is important to make sure that we have uploaded the library 'tmap';
+Here we create maps of NDVI with 'tm_shape' function applied to raster data (tm_raster). It is important to make sure that we have uploaded the library 'tmap';
 
 ```{r}
 # Map NDVI 2015
@@ -191,7 +191,7 @@ NDVI_2019.1_map <- tm_shape(NDVI_2019.1) + tm_raster(palette="YlGn",n=5) + tm_le
 NDVI_2019.2_map <- tm_shape(NDVI_2019.2) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
 ```
 
-## Visualize NDVI raster maps 
+### 2.4 Visualize NDVI raster maps 
 
 First for 2015 ('ncol' means the number of columns up to a maximum limit of 4 features)
 
@@ -202,33 +202,25 @@ tmap_arrange(NDVI_2015.1_map,
 ```
 ![Image description](NDVI_2015_Satellite.jpg)
 
-For 2016
+For the remaining years:
 
 ```{r}
+#2016
 tmap_arrange(NDVI_2016.1_map, 
              NDVI_2016.2_map, 
              ncol=2)
-```
-
-For 2017
-
-```{r}
+             
+#2017
 tmap_arrange(NDVI_2017.1_map, 
              NDVI_2017.2_map, 
              ncol=2)
-```
-
-For 2018
-
-```{r}
+             
+#2018
 tmap_arrange(NDVI_2018.1_map, 
              NDVI_2018.2_map, 
              ncol=2)
-```
 
-For 2019
-
-```{r}
+#2019
 tmap_arrange(NDVI_2019.1_map, 
              NDVI_2019.2_map, 
              ncol=2)
