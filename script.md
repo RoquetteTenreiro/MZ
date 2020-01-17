@@ -946,3 +946,36 @@ aggregate(stats$Yield_2019, by=list(stats$ZONE), FUN=sd)
 |Yield_2017|	2.01 (0.24)	|1.96 (0.24)	|2.21 (0.19)	|0.29|
 |Yield_2018|	4.28 (0.97)	|5.34 (0.86)	|5.31 (0.85)	|0.06|
 |Yield_2019|	5.65 (1.77)	|4.72 (1.80)	|5.8 (1.46)|	0.46|
+
+
+
+### 4.5 Geo-statistical analysis 
+
+```{r}
+g_2015 <- ggplot(stats_data, aes(X, Y)) +
+geom_point(aes(colour = Yield_2015),size=3) + scale_colour_gradient(low="orange", high="forestgreen") +
+labs(colour = "Yield (ton/ha)", x="Longitude", y="Latitude", title = "Sample Yield Monitor Data")
+
+g_2016 <- ggplot(stats_data, aes(X, Y)) +
+geom_point(aes(colour = Yield_2016),size=3) + scale_colour_gradient(low="orange", high="forestgreen") +
+labs(colour = "Yield (ton/ha)", x="Longitude", y="Latitude", title = "Sample Yield Monitor Data")
+
+g_2017 <- ggplot(stats_data, aes(X, Y)) +
+geom_point(aes(colour = Yield_2017),size=3) + scale_colour_gradient(low="orange", high="forestgreen") +
+labs(colour = "Yield (ton/ha)", x="Longitude", y="Latitude", title = "Sample Yield Monitor Data")
+
+g_2018 <- ggplot(stats_data, aes(X, Y)) +
+geom_point(aes(colour = Yield_2018),size=3) + scale_colour_gradient(low="orange", high="forestgreen") +
+labs(colour = "Yield (ton/ha)", x="Longitude", y="Latitude", title = "Sample Yield Monitor Data")
+
+g_2019 <- ggplot(stats_data, aes(X, Y)) +
+geom_point(aes(colour = Yield_2019),size=3) + scale_colour_gradient(low="orange", high="forestgreen") +
+labs(colour = "Yield (ton/ha)", x="Longitude", y="Latitude", title = "Sample Yield Monitor Data")
+
+grid.arrange(g_2015, g_2016, g_2017, g_2018, g_2019, 
+             ncol = 2, nrow = 3)
+```
+
+![Image description](CoordMaps_Geo_stats.jpg)
+
+             
