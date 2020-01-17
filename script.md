@@ -6,6 +6,7 @@
 
 > Institute for Sustainable Agriculture (IAS-CSIC) - Córdoba, 2020
 
+#### 1. Get started
 ### 1.1 R-Markdown script
 
 This is an R-Markdown script presentation. R-Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R-Markdown see <http://rmarkdown.rstudio.com>. This document includes both general instructions and comments by the author as well as the script code developed and the output of any embedded R code chunks within this document.
@@ -82,7 +83,9 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = "C:/Users/Tomas R. Tenreiro/Desktop/Experimental_Catchment_Cordoba_19_20")
 ```
 
-### 1.5 Input material
+#### 2 Historical remote sensing data
+
+### 1.1 Input material
 
 This section uploads all input material. In this particular case, we will work with satellite data (Landsat-8 and Sentinel-2), atmospherically corrected (and cloud cover < 4%), that was downloaded from EO-browser (https://apps.sentinel-hub.com/). The script considers imagery from five different growing seasons (i.e. 2015, 2016, 2017, 2018 and 2019). In order to explore spatial correlation between plant vigor and soil properties under rainfed conditions, we focused on late phenological stages before crop senescence. The two consecutive images taken imediatly after flowering stage were selected for each year. 2015 and 2017 imagery corresponds to a sunflower crop, 2016 and 2018 to a winter wheat crop and 2019 imagery corresponds to a canola crop. 
 
@@ -135,9 +138,8 @@ NIR.2019.1 <- raster("SAT Imagery/NIR_14.04.2019.tiff")
 Red.2019.2 <- raster("SAT Imagery/Red_27.04.2019.tiff")
 NIR.2019.2 <- raster("SAT Imagery/NIR_27.04.2019.tiff")
 ```
-### 2 Historical remote sensing data
 
-## 2.1 Estimate NDVI 
+## 2.2 Estimate NDVI 
 
 This section estimates NDVI considering that Landsat-8 satellite B4 corresponds to Red wave length and B5 to NIR wave length; Sentinel-2 satellite B4 corresponds to Red wave length and B8 to NIR wave length. Data is in raster format with a spatial resolution of 30x30m (Landsat-8) or 10x10m (Sentinel-2).
 
