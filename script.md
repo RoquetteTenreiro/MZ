@@ -89,7 +89,7 @@ knitr::opts_knit$set(root.dir = "C:/Users/Tomas R. Tenreiro/Desktop/Experimental
 
 This section uploads all input material. In this particular case, we will work with satellite data (Landsat-8 and Sentinel-2), atmospherically corrected (and cloud cover < 4%), that was downloaded from EO-browser (https://apps.sentinel-hub.com/). The script considers imagery from five different growing seasons (i.e. 2015, 2016, 2017, 2018 and 2019). In order to explore spatial correlation between plant vigor and soil properties under rainfed conditions, we focused on late phenological stages before crop senescence. The two consecutive images taken imediatly after flowering stage were selected for each year. 2015 and 2017 imagery corresponds to a sunflower crop, 2016 and 2018 to a winter wheat crop and 2019 imagery corresponds to a canola crop. 
 
-| Year | Crop             | Date 1     | Date 2     | Satellite   | Sp.Resolution |
+| Year | Crop             | Date 1     | Date 2     | Satellite   | Spatial Resolution |
 |------|------------------|------------|------------|-------------|---------------|
 | 2015 | Sunflower        | 05/6/2015  | 07/7/2015  | Landsat-8   | 30x30 m       |
 | 2016 | Wheat (durum)    | 07/6/2016  | 23/6/2016  | Landsat-8   | 30x30 m       |
@@ -731,7 +731,7 @@ data.pca$rotation
 
 We observe that NDVI data are clustered for the first principal component, which explains about 28% of total variation, in two separate groups: wheat and sunflower + canola. Apparently, crops vigor might co-variate with geophysical properties in similar forms according to these two groups, highlighting the crop type effect on spatial correlations. All variables were analysed according to the PC-scores. The PC-scores were calculated as the sum of modules of each of the two principal components (capable to explain about 47% of total variation within the field). We aim to identify the highest correlations by selecting variables that are defined by the largest (and similar) space vectors within the PCA plot. These are the variables that reveal the largest co-variation within the field. We proceed to select all variables with PC-scores higher than 0.5 for the two principal components. 
 
-| Variable	| PC1	| PC2	| Module-PC1 |Module-PC2|	PC-score | Water stress |	Crop |
+| Variable	| PC1	| PC2	| Mode-PC1 |Mod-PC2|	PC-score | Water stress |	Crop |
 |-----------|-----|-----|------------|----------|----------|--------------|------|
 |Elevation	| 0.246073496	|-0.506219	|0.246073496	|0.506219	|0.752292496 |	
 |Orientation|	-0.275479193	| -0.0846252 |	0.275479193	| 0.0846252	| 0.360104393	|	|
