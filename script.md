@@ -698,12 +698,11 @@ According to Oliver. (2010), we consider as low, medium or high CV all values, r
 
 - Oliver, M. A. (Ed.). (2010). Geostatistical applications for precision agriculture. Springer Science & Business Media.
 
-## 4 Co-variance and data correlation
+## 4 Data hierarchical considerations
 
-### 4.1 Filtering data with Principal Component Analysis
+### 4.1 Filtering data with Principal Component Analysis (PCA)
 
 ```{r}
-
 install.packages("devtools")
 library(devtools)
 install_github("vqv/ggbiplot")
@@ -714,18 +713,25 @@ install.packages("ggfortify")
 library(ggfortify)
 library(cluster)
 
+MZ_joined$NDVI_2019 <- ((MZ_joined$NDVI_2019.1 + MZ_joined$NDVI_2019.2 / 2))
+MZ_joined$NDVI_2018 <- ((MZ_joined$NDVI_2018.1 + MZ_joined$NDVI_2018.2 / 2))
+MZ_joined$NDVI_2017 <- ((MZ_joined$NDVI_2017.1 + MZ_joined$NDVI_2017.2 / 2))
+MZ_joined$NDVI_2016 <- ((MZ_joined$NDVI_2016.1 + MZ_joined$NDVI_2016.2 / 2))
+MZ_joined$NDVI_2015 <- ((MZ_joined$NDVI_2015.1 + MZ_joined$NDVI_2015.2 / 2))
+
+MZ_joined$ID <- seq.int(nrow(MZ_joined))
+
+rm(dataframe)
+dataframe = fortify(MZ_joined)
+dataframe$geometry <- NULL
+
+dataframe <- dataframe[,c(11:14,17:19,20:25)]
+
+data.pca <- prcomp(dataframe[,c(1:12)], scale = TRUE)
+
+summary(data.pca)
+autoplot(data.pca, colour = 'white', loadings = TRUE, loadings.label = TRUE, loadings.label.size  = 5)
+
+data.pca$rotation
 ```
-
-```{r}
-
-install.packages("devtools")
-library(devtools)
-install_github("vqv/ggbiplot")
-library(ggbiplot)
-install.packages("factoextra")
-library(factoextra)
-install.packages("ggfortify")
-library(ggfortify)
-library(cluster)
-
-```
+![Image description](PCA.jpg)
