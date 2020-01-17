@@ -88,7 +88,7 @@ This section uploads all input material. In this particular case, we will work w
 
 | Year | Crop             | Date 1     | Date 2     | Satellite   | Sp.Resolution |
 |------|------------------|------------|------------|-------------|---------------|
-| 2015 | Sunflower        | 05/6/2016  | 07/7/2016  | Landsat-8   | 30x30 m       |
+| 2015 | Sunflower        | 05/6/2015  | 07/7/2015  | Landsat-8   | 30x30 m       |
 | 2016 | Wheat (durum)    | 07/6/2016  | 23/6/2016  | Landsat-8   | 30x30 m       |
 | 2017 | Sunflower        | 10/6/2017  | 26/6/2017  | Landsat-8   | 30x30 m       |
 | 2018 | Wheat (durum)    | 22/5/2018  | 03/6/2018  | Sentinel-2  | 10x10 m       |
