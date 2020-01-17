@@ -736,6 +736,8 @@ data.pca$rotation
 ```
 ![Image description](PCA.jpg)
 
+We observe that NDVI data are clustered for the first principal component, which explains about 28% of total variation, in two separate groups: wheat and sunflower + canola. Apparently, crops vigor might co-variate with geophysical properties in similar forms according to these two groups. All variables were analysed according to the PC-scores. The PC-scores were calculated as the sum of modules of each of the two principal components (capable to explain about 47% of total variation within the field). We aim to identify the highest correlations by selecting variables that are defined by the largest (and similar) space vectors within the PCA plot. These are the variables that reveal the largest co-variation within the field. We proceed to select all variables with PC-scores higher than 0.5 for the two principal components. 
+
 ### 4.2 Build dataframe for k-means clustering
 
 In this step we build a sub dataframe for clustering and we check the optimal amount of clusters with two methods conducted on scaled data. For more information, please check the following references:
