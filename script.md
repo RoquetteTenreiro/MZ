@@ -732,7 +732,7 @@ data.pca$rotation
 
 We observe that NDVI data are clustered for the first principal component, which explains about 28% of total variation, in two separate groups: 1) wheat and 2) sunflower + canola. Apparently, crops vigor might co-variate with geophysical properties in similar forms according to these two groups, highlighting the crop type effect on spatial correlations. All variables were analysed according to the PC-scores. The PC-scores were calculated as the sum of modules for each of the two principal components (capable to explain about 47% of total variation within the field). We aim to identify the highest correlations by selecting variables that are defined by the largest (and similar) space vectors within the PCA plot. These are the variables that reveal the largest co-variation within the field. We proceed to select all variables with PC-scores higher than 0.5 for the two principal components. Six variables are selected, four geophysical related (Elevation, Clay, pH and ECa1) and two crop (biological) based (NDVI 2017 and 2016). 
 
-| Variable	| PC1	| PC2	| Mode-PC1 |Mod-PC2|	PC-score | Water stress |	Crop |
+| Variable	| PC1	| PC2	| Mod-PC1 |Mod-PC2|	PC-score | Water stress |	Crop |
 |-----------|-----|-----|------------|----------|----------|--------------|------|
 |**Elevation**	| 0.246073496	|-0.506219	|0.246073496	|0.506219	|**0.752292496** |	*not applicable* |*not applicable* |
 |Orientation|	-0.275479193	| -0.0846252 |	0.275479193	| 0.0846252	| 0.360104393	|	*not applicable* |*not applicable* |
