@@ -1188,4 +1188,10 @@ plot.ts(times_series)
 ```
 ![Image description](GVF_ts.jpg)
 
-We observed differences, not only regarding yield patterns but also in yield response to the combination of geophysical properties depending on the crop species. For years with spatial variable yields, the ’Goodness of Variance Fit’ varied in comparable ranges but the performance of zone B differed considerably according to the crop species. The uncertainty associated with temporal asymmetry of yield clustering and MZ’s performance indicate that MZ’s temporal instability is an important issue for site-specific management as agronomic implications vary greatly with *crop × year* setting, being particularly relevant for crop rotations involving annual species. 
+We observed differences, not only regarding yield patterns but also in yield response to the combination of geophysical properties depending on the crop species. For years with spatial variable yields, the ’Goodness of Variance Fit’ varied in comparable ranges but the performance of zone B differed considerably according to the crop species. The uncertainty associated with temporal asymmetry of yield clustering and MZ’s performance indicate that MZ’s temporal instability is an important issue for site-specific management as agronomic implications vary greatly with *crop × year* setting, being particularly relevant for crop rotations involving annual species. Other authors have concluded that the use of crop data on MZ delineation might add agronomic meaning to the clustering process under comparable conditions, but the temporal inconsistency of yield patterns might constrain their application for different conditions. 
+
+- Godwin, R. J., Wood, G. A., Taylor, J. C., Knight, S. M., & Welsh, J. P. (2003). Precision farming of cereal crops: a review of a six year experiment to develop management guidelines. Biosystems Engineering, 84(4), 375-391.
+
+- Khosla, R., Westfall, D. G., Reich, R. M., Mahal, J. S., & Gangloff, W. J. (2010). Spatial variation and site-specific management zones. In Geostatistical applications for precision agriculture (195-219). Springer.
+
+- Welsh, J. P., Wood, G. A., Godwin, R. J., Taylor, J. C., Earl, R., Blackmore, S., & Knight, S. M. (2003). Developing strategies for spatially variable nitrogen application in cereals, part II: wheat. Biosystems Engineering, 84(4), 495-511.
