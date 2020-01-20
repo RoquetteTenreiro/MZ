@@ -1196,6 +1196,6 @@ We observed differences, not only regarding yield patterns but also in yield res
 
 - Welsh, J. P., Wood, G. A., Godwin, R. J., Taylor, J. C., Earl, R., Blackmore, S., & Knight, S. M. (2003). Developing strategies for spatially variable nitrogen application in cereals, part II: wheat. Biosystems Engineering, 84(4), 495-511.
 
--Yamagishi, J., Nakamoto, T., & Richner, W. (2003). Stability of spatial variability of wheat and maize biomass in a small field managed under two contrasting tillage systems over 3 years. Field crops research, 81(2-3), 95-108.
+- Yamagishi, J., Nakamoto, T., & Richner, W. (2003). Stability of spatial variability of wheat and maize biomass in a small field managed under two contrasting tillage systems over 3 years. Field crops research, 81(2-3), 95-108.
 
 The lack of temporal stability and the weak spatial correlations between MZ's and yield (low and usatble GVF values), indicate that the delineation of pre-sowing (or pre-emergence) site-specific management, purely based on data analytics applied to historical spatial variability, is a dificult task.
