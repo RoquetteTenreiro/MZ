@@ -1055,8 +1055,17 @@ The cumulative probabilities for 2015 and 1019 indicate unsubstantial difference
 
 Two major observations deserve to be done. Despite the spatial correlation of yield variation, differences in both 2015 and 2017 were too low to delineate MZ's. For the remaining years, two of them were capable to explain most of the variation but assimetric yield patterns caused by different *crop x year* settings reveal inconsistency on the relation between MZ and yield for at least on MZ (i.e. Zone B). The data fitted into variograms with different structures (i.e. small variations of the Lag distance and different curve shapes), which also indicates that the spatial variation was not uniform from year to year. This is partly associated to the year effect (here quantified as the water stress ratio) and it was also related to the crop species (zone B yields relatively more or less according to the species: wheat (2016 and 2018) vs. sunflower (2017).
 
+```{r}
+# Explore geophysical differences among MZ's
+g_clay <- ggplot(stats_data, aes(Clay, colour = ZONE)) + stat_ecdf() + ggtitle("Cumulative Probability - Clay %") 
+g_E <- ggplot(stats_data, aes(Elevation, colour = ZONE)) + stat_ecdf() + ggtitle("Cumulative Probability - Elevation") 
+g_pH <- ggplot(stats_data, aes(pH, colour = ZONE)) + stat_ecdf() + ggtitle("Cumulative Probability - pH") 
+g_ECa1 <- ggplot(stats_data, aes(ECa1, colour = ZONE)) + stat_ecdf() + ggtitle("Cumulative Probability - ECa1") 
 
-
+grid.arrange(g_E, g_clay, g_pH, g_ECa1,
+             ncol = 2, nrow = 2)
+```
+![Image description](GeoMZ.jpg)
 ```{r}
 # The goodness of variance fit (GVF)
 
