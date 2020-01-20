@@ -1049,6 +1049,13 @@ grid.arrange(g_1, g_2, g_3, g_4, g_5,
 
 ![Image description](CumProb.jpg)
 
+The cumulative plots indicate consistency of MZ-C as the highest yielding zone. The zone C has yielded the most in all years. However, these differences must only be considered for 2016, 2017 and 2018. At 50% probability, winter wheat yield differences varied on about 1 ton/ha among MZ's. Larger differences were observed for 2018 (i.e. about 2 ton/ha). Sunflower yields varied among MZ's under a similar order of magnitude (2017). As the MZ-C was the highest yielding zone for the majority of years, the MZ-A has shown to be the lowest. Inconsistency is observed for the case of MZ-B, which yielded the most with wheat (2016 and 2018) but the least with sunflower (2017). 
+
+The cumulative probabilities for 2015 and 1019 indicate unsubstantial differences among MZ's. Both years were characterized by water shortage (i.e. water stress index of about 50%). We may note that the spatial variation of yield and the differentiation of yield classes by MZ were irrelevant for both years of high level of water stress. For both 2015 and 2019, yields seem to have been limitted by water supply and the potential productivities of different MZ's were homogeneized. 
+
+Two major observation deserve to be done. Despite the spatial correlation of yield variation, differences in both 2015 and 2017 were too low to delineate MZ's. For the remaining years, two of them were capable to explain most of the variation but assimetric yield patterns caused by different crop x year settings revealed inconsistency on the relation between MZ and yield for at least on MZ (i.e. Zone B). The data fitted into variograms with different structures (i.e. small variations of the Lag distance and different curve shapes), which also indicates that the spatial variation was not uniform from year to year. This is partly associated to the year effect (here quantified as the water stress ratio) and it was also related to the crop species (Zone B yields relatively more or less according t the species: wheat (2016 and 2018) vs. sunflower (2017).
+
+
 
 ```{r}
 # The goodness of variance fit (GVF)
