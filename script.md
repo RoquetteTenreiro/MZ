@@ -1097,17 +1097,21 @@ While canola yield in 2017 was better correlated with Elevation (positively affe
 
 - Nielsen, D. R., & Alemi, M. H. (1989). Statistical opportunities for analyzing spatial and temporal heterogeneity of field soils. Plant and Soil, 115(2), 285-296.
 
-Soil clay content was found to be the most representative parameter of wheat yield as also reported by Aschonitis et al. (2013). However the agronomic interpretation of high performing zone B is not straight forward. According to Ficher. (2011), the spatial patterns of wheat yield are unlikely to be correlated to mineral toxicity as the higher clay content zone (zone A) was the less productive one. Water-logging is also not likely to explain the differences in this case as the higher clay content zone is not located at the lowest elevations, and therefore, lateral drainage as well as superficial flow would be expected to occur. According to Hochman et al. (2009), we could expect lower yields in lower elevation zones as well (zone C), but this was not observed. Different relations between evaporation and transpiration could be accepted if higher yield was observed in lower clay content zones (Wang et al., 2009), but this was also not the case. Comparable differences among clay-loamy and clay textured soils were described by Lithourgidis et al. (2006), but the proposed explanatory variable ECa, associated to salt dilution, varies in a larger range in comparison to the current case-study. 
+Soil clay content was found to be the most representative parameter of wheat yield as also reported by Aschonitis et al. (2013). However the agronomic interpretation of high performing zone B is not straight forward. According to Ficher. (2011), the spatial patterns of wheat yield are unlikely to be correlated to mineral toxicity as the higher clay content zone (zone A) was the less productive one (Keren et al., 1985). Water-logging is also not likely to explain the differences in this case as the higher clay content zone is not located at the lowest elevations, and therefore, lateral drainage as well as superficial flow would be expected to occur. According to Hochman et al. (2009), we could expect lower yields in lower elevation zones due to saturation (zone C), but this was not observed. Different relations between evaporation and transpiration could be accepted if higher yield was observed in lower clay content zones (Wang et al., 2009), but this was also not the case. Comparable differences among clay-loamy and clay textured soils were described by Lithourgidis et al. (2006), but the proposed explanatory variable ECa, associated to salt dilution, varied in a larger range in comparison to our case-study. 
 
 - Aschonitis, V. G., Lithourgidis, A. S., Damalas, C. A., & Antonopoulos, V. Z. (2013). Modelling yields of non-irrigated winter wheat in a semi-arid mediterranean environment based on drought variability. Experimental agriculture, 49(3), 448-460.
 
 - Fischer, R. A. (2011). Wheat physiology: a review of recent developments. Crop and Pasture Science, 62(2), 95-114.
+
+- Keren, R., Bingham, F. T., & Rhoades, J. D. (1985). Effect of Clay Content in Soil on Boron Uptake and Yield of Wheat 1. Soil Science Society of America Journal, 49(6), 1466-1470.
 
 - Lithourgidis, A. S., Damalas, C. A., & Gagianas, A. A. (2006). Long-term yield patterns for continuous winter wheat cropping in northern Greece. European Journal of Agronomy, 25(3), 208-214.
 
 - Hochman, Z., Holzworth, D., & Hunt, J. R. (2009). Potential to improve on-farm wheat yield and WUE in Australia. Crop and Pasture Science, 60(8), 708-716.
 
 - Wang, E., Cresswell, H., Xu, J., & Jiang, Q. (2009). Capacity of soils to buffer impact of climate variability and value of seasonal forecasts. Agricultural and Forest Meteorology, 149(1), 38-50.
+
+
 
 ```{r}
 # The goodness of variance fit (GVF)
