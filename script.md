@@ -1048,3 +1048,67 @@ grid.arrange(g_1, g_2, g_3, g_4, g_5,
 ```
 
 ![Image description](CumProb.jpg)
+
+
+```{r}
+# The goodness of variance fit (GVF)
+
+#GVF for Yield 2015
+SST = sum( (stats_data$Yield_2015 - mean(stats_data$Yield_2015) )^2 )
+SSW_A = sum( (stats_data$Yield_2015[stats$ZONE == "A"] - mean(stats_data$Yield_2015[stats_data$ZONE == "A"]) )^2 )
+SSW_B = sum( (stats_data$Yield_2015[stats$ZONE == "B"] - mean(stats_data$Yield_2015[stats_data$ZONE == "B"]) )^2 )
+SSW_C = sum( (stats_data$Yield_2015[stats$ZONE == "C"] - mean(stats_data$Yield_2015[stats_data$ZONE == "C"]) )^2 )
+SSW = SSW_A + SSW_B + SSW_C + SSW_D
+
+GVF.2015 = (SST -SSW)/SST
+GVF.2015
+
+#GVF for Yield 2016
+SST = sum( (stats_data$Yield_2016 - mean(stats_data$Yield_2016) )^2 )
+SSW_A = sum( (stats_data$Yield_2016[stats$ZONE == "A"] - mean(stats_data$Yield_2016[stats_data$ZONE == "A"]) )^2 )
+SSW_B = sum( (stats_data$Yield_2016[stats$ZONE == "B"] - mean(stats_data$Yield_2016[stats_data$ZONE == "B"]) )^2 )
+SSW_C = sum( (stats_data$Yield_2016[stats$ZONE == "C"] - mean(stats_data$Yield_2016[stats_data$ZONE == "C"]) )^2 )
+SSW = SSW_A + SSW_B + SSW_C + SSW_D
+
+GVF.2016 = (SST -SSW)/SST
+GVF.2016
+
+#GVF for Yield 2017
+SST = sum( (stats_data$Yield_2017 - mean(stats_data$Yield_2017) )^2 )
+SSW_A = sum( (stats_data$Yield_2017[stats$ZONE == "A"] - mean(stats_data$Yield_2017[stats_data$ZONE == "A"]) )^2 )
+SSW_B = sum( (stats_data$Yield_2017[stats$ZONE == "B"] - mean(stats_data$Yield_2017[stats_data$ZONE == "B"]) )^2 )
+SSW_C = sum( (stats_data$Yield_2017[stats$ZONE == "C"] - mean(stats_data$Yield_2017[stats_data$ZONE == "C"]) )^2 )
+SSW = SSW_A + SSW_B + SSW_C + SSW_D
+
+GVF.2017 = (SST -SSW)/SST
+GVF.2017
+
+#GVF for Yield 2018
+SST = sum( (stats_data$Yield_2018 - mean(stats_data$Yield_2018) )^2 )
+SSW_A = sum( (stats_data$Yield_2018[stats$ZONE == "A"] - mean(stats_data$Yield_2018[stats_data$ZONE == "A"]) )^2 )
+SSW_B = sum( (stats_data$Yield_2018[stats$ZONE == "B"] - mean(stats_data$Yield_2018[stats_data$ZONE == "B"]) )^2 )
+SSW_C = sum( (stats_data$Yield_2018[stats$ZONE == "C"] - mean(stats_data$Yield_2018[stats_data$ZONE == "C"]) )^2 )
+SSW = SSW_A + SSW_B + SSW_C + SSW_D
+
+GVF.2018 = (SST -SSW)/SST
+GVF.2018
+
+#GVF for Yield 2019
+SST = sum( (stats_data$Yield_2019 - mean(stats_data$Yield_2019) )^2 )
+SSW_A = sum( (stats_data$Yield_2019[stats$ZONE == "A"] - mean(stats_data$Yield_2019[stats_data$ZONE == "A"]) )^2 )
+SSW_B = sum( (stats_data$Yield_2019[stats$ZONE == "B"] - mean(stats_data$Yield_2019[stats_data$ZONE == "B"]) )^2 )
+SSW_C = sum( (stats_data$Yield_2019[stats$ZONE == "C"] - mean(stats_data$Yield_2019[stats_data$ZONE == "C"]) )^2 )
+SSW = SSW_A + SSW_B + SSW_C + SSW_D
+
+GVF.2019 = (SST -SSW)/SST
+GVF.209
+
+```
+
+|Year (Yield)| GVF |
+|------------|-----|
+|2015| 1% |
+|2016| 27%|
+|2017| 19% |
+|2018| 23%|
+|2019| 7%|
