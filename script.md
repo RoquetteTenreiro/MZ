@@ -1076,9 +1076,23 @@ grid.arrange(g_E, g_clay, g_pH, g_ECa1,
 |Wheat yield| Lower | Higher | Higher|
 |Sunflower yield| Lower|Lower|Higher|
 
+```{r}
+# Correlograms for quantification of spatial dependence according to Nielsen & Alemi. (1989)
+
+# First Correlogram Example
+install.packages("corrgram")
+library(corrgram)
+library(GGally)
+
+stats_crr <- stats_data[c(1:10)]
+ggcorr(stats_crr, method = c("everything", "pearson"))
+```
+
 ![Image description](Correlations.jpg)
 
 While canola yield in 2017 was better correlated with Elevation (positively affected in lower elevations, approximately below 175m), wheat yield in both 2016 and 2018 show higher correlation with % Clay (negatively affected by clay content above 43-45%).
+
+- Nielsen, D. R., & Alemi, M. H. (1989). Statistical opportunities for analyzing spatial and temporal heterogeneity of field soils. Plant and Soil, 115(2), 285-296.
 
 ```{r}
 # The goodness of variance fit (GVF)
