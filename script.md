@@ -1,6 +1,6 @@
 # Uncertainties associated with the delineation of management zones in precision agriculture
 
-![Image description](cover_MZ.jpeg)
+![Image description](cover_MZ.jpg)
 
 > Author: Tomás Roquette Tenreiro
 
