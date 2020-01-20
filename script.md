@@ -1034,3 +1034,17 @@ plot(Yield_2019.var, model=Yield_2019.vgm)
 ![Image description](Variograms_Yield.jpg)
 
 Most of the years fitted into variograms with 'monotonic increasing  slope', which indicates that yield was spatially dependent or autocorrelated (for a Lag distance of aprox. 80-120m). All years, except 2018, fit into a variogram that reaches an upper bound after the initial slope. For 2018, we obtained one 'unbounded variogram' with a Lag distance > 280m, indicating that the correlation range is larger than the distance. This might indicate that our plot is too small for an accurate analysis of spatial variation in 2018.              
+```{r}
+# Cumulative probabilities - plots
+g_1 <- ggplot(stats_data, aes(Yield_2015, colour = ZONE)) + stat_ecdf() + ggtitle("Cumulative Probability - Yield 2015") 
+g_2 <- ggplot(stats_data, aes(Yield_2016, colour = ZONE)) + stat_ecdf() + ggtitle("Cumulative Probability - Yield 2016")
+g_3 <- ggplot(stats_data, aes(Yield_2017, colour = ZONE)) + stat_ecdf() + ggtitle("Cumulative Probability - Yield 2017")
+g_4 <- ggplot(stats_data, aes(Yield_2018, colour = ZONE)) + stat_ecdf() + ggtitle("Cumulative Probability - Yield 2018")
+g_5 <- ggplot(stats_data, aes(Yield_2019, colour = ZONE)) + stat_ecdf() + ggtitle("Cumulative Probability - Yield 2019")
+
+# Print
+grid.arrange(g_1, g_2, g_3, g_4, g_5,
+             ncol = 2, nrow = 3)
+```
+
+![Image description](Cum_Prob.jpg)
