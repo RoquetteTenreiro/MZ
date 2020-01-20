@@ -1066,6 +1066,16 @@ grid.arrange(g_E, g_clay, g_pH, g_ECa1,
              ncol = 2, nrow = 2)
 ```
 ![Image description](Geo_MZ.jpg)
+
+|Variable|Zone A|Zone B|Zone C|
+|--------|------|------|------|
+|Elevation|Medium|High|Low|
+|% Clay| Higher | Lower | Lower|
+|pH | *non limitting* |*non limitting* |*non limitting* |
+|ECa1|Higher|Lower|Higher|
+|Wheat yield| Lower | Higher | Higher|
+|Sunflower yield| Lower|Lower|Higher|
+
 ```{r}
 # The goodness of variance fit (GVF)
 
