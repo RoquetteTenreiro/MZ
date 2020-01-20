@@ -1111,7 +1111,7 @@ Soil clay content was found to be the most representative parameter of wheat yie
 
 - Wang, E., Cresswell, H., Xu, J., & Jiang, Q. (2009). Capacity of soils to buffer impact of climate variability and value of seasonal forecasts. Agricultural and Forest Meteorology, 149(1), 38-50.
 
-
+For the case of sunflower, the medium level of water stress (29%) might partially explain the good correlation observed between yield and topography. Lower elevations (<175m) were more productive (zone C) while medium-high elevations yielded less. However, differences may be neglected as yields varied less than 1 ton/ha among MZ's. 
 
 ```{r}
 # The goodness of variance fit (GVF)
