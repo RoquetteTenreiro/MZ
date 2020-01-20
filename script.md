@@ -1076,6 +1076,10 @@ grid.arrange(g_E, g_clay, g_pH, g_ECa1,
 |Wheat yield| Lower | Higher | Higher|
 |Sunflower yield| Lower|Lower|Higher|
 
+![Image description](Correlations.jpg)
+
+While canola yield in 2017 was better correlated with Elevation (positively affected in lower elevations, approximately below 175m), wheat yield in both 2016 and 2018 show higher correlation with % Clay (negatively affected by clay content above 43-45%).
+
 ```{r}
 # The goodness of variance fit (GVF)
 
