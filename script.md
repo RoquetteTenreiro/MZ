@@ -533,6 +533,7 @@ include_graphics(img6_path)
 ### 3.2 Upload soil physical and chemical data 
 
 Data collected at 10th October 2019 
+
 Field location: Guadálcazar, Córdoba, Spain
 
 Four different types of properties:
@@ -729,7 +730,7 @@ data.pca$rotation
 ```
 ![Image description](PCA.jpg)
 
-We observe that NDVI data are clustered for the first principal component, which explains about 28% of total variation, in two separate groups: wheat and sunflower + canola. Apparently, crops vigor might co-variate with geophysical properties in similar forms according to these two groups, highlighting the crop type effect on spatial correlations. All variables were analysed according to the PC-scores. The PC-scores were calculated as the sum of modules of each of the two principal components (capable to explain about 47% of total variation within the field). We aim to identify the highest correlations by selecting variables that are defined by the largest (and similar) space vectors within the PCA plot. These are the variables that reveal the largest co-variation within the field. We proceed to select all variables with PC-scores higher than 0.5 for the two principal components. 
+We observe that NDVI data are clustered for the first principal component, which explains about 28% of total variation, in two separate groups: 1) wheat and 2) sunflower + canola. Apparently, crops vigor might co-variate with geophysical properties in similar forms according to these two groups, highlighting the crop type effect on spatial correlations. All variables were analysed according to the PC-scores. The PC-scores were calculated as the sum of modules for each of the two principal components (capable to explain about 47% of total variation within the field). We aim to identify the highest correlations by selecting variables that are defined by the largest (and similar) space vectors within the PCA plot. These are the variables that reveal the largest co-variation within the field. We proceed to select all variables with PC-scores higher than 0.5 for the two principal components. Five variables are selected, three geophysical related and two crop (biological) based. 
 
 | Variable	| PC1	| PC2	| Mode-PC1 |Mod-PC2|	PC-score | Water stress |	Crop |
 |-----------|-----|-----|------------|----------|----------|--------------|------|
@@ -746,6 +747,7 @@ We observe that NDVI data are clustered for the first principal component, which
 |**NDVI	2016**|	0.281983167|	0.3287212	|0.281983167|	0.3287212	|**0.610704367**|	0.27	|Wheat|
 |NDVI	2015|	0.021294623	|0.3011159	|0.021294623	|0.3011159	|0.322410523|	0.47	|Sunflower|
 
+Water stress is determined as one minus the division of gross season rainfall by growing season ET0. Considering the high water retention capacity of these soils, gross season rainfall was considered from September to the harvesting date, while season ET0 was considered for the aproximated growing season: November-June in the case of winter wheat, March-August for Sunflower, and October-May for canola. A water stress index of 0 means full requirements covered (i.e. total ET0 fully covered by season rainfall), a water stress of 30% means that season rainfall was 70% of total ET0, a water stress of 0 would mean absolute lack of rainfall. 
 
 ### 4.2 Build dataframe for k-means clustering
 
@@ -776,7 +778,7 @@ fviz_nbclust(data.scale, kmeans, method = "gap_stat")+
 
 ### 4.3 Unsupervised k-means clustering
 
-Upload libraries and apply k-means to the dataset; please do not forget to scale your data.
+Uploading libraries and applying k-means to the dataset; please do not forget to scale your data.
 
 ``` {r}
 library(dplyr)
@@ -815,7 +817,7 @@ mergedata$ZONE[mergedata$ZONE == "3"] <- "C"
 ```
 ![Image description](K-means.jpg)
 
-Get yield maps from modelling simulations:
+Get yield maps from yield monitoring or modelling simulations:
 
 ```{r}
 # Simulated Yield maps from NDVI
