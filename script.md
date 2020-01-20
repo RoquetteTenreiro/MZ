@@ -1047,4 +1047,4 @@ grid.arrange(g_1, g_2, g_3, g_4, g_5,
              ncol = 2, nrow = 3)
 ```
 
-![Image description](Cum_Prob.jpg)
+![Image description](CumProb.jpg)
