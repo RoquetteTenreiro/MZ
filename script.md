@@ -1065,7 +1065,7 @@ g_ECa1 <- ggplot(stats_data, aes(ECa1, colour = ZONE)) + stat_ecdf() + ggtitle("
 grid.arrange(g_E, g_clay, g_pH, g_ECa1,
              ncol = 2, nrow = 2)
 ```
-![Image description](GeoMZ.jpg)
+![Image description](Geo_MZ.jpg)
 ```{r}
 # The goodness of variance fit (GVF)
 
