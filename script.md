@@ -195,7 +195,6 @@ g2 <- ggplot(time_series, aes(x = Date, y = NDVI_2019)) +
   geom_area(fill = "darkolivegreen2", alpha=0.4)
 
 ###########################################
-###########################################
 
 # Upload 2018 Satellite NDVI data
 R.2018.ts.1  <- raster("SAT Imagery/Time-series/Red.26.10.2017.tiff")
@@ -304,7 +303,6 @@ g1 <- ggplot(time_series, aes(x = Date, y = NDVI_2018)) +
   geom_area(fill = "darkolivegreen2", alpha=0.4)
 
 ###########################################
-###########################################
 
 # Upload 2017 Satellite NDVI data
 
@@ -405,7 +403,6 @@ g3 <- ggplot(time_series, aes(x = Date, y = NDVI_2017)) +
   geom_area(fill = "darkolivegreen2", alpha=0.4)
 
 ###########################################
-###########################################
 
 # Upload 2016 Satellite NDVI data
 
@@ -496,7 +493,6 @@ g4 <- ggplot(time_series, aes(x = Date, y = NDVI_2016)) +
 	theme_classic() + ylim(0, 1) + xlim(as.Date(c('15/10/2015', '20/07/2016'), format="%d/%m/%Y")) +
   geom_area(fill = "darkolivegreen2", alpha=0.4)
 
-###########################################
 ###########################################
 
 # Upload 2015 Satellite NDVI data
@@ -633,44 +629,36 @@ From this point we will work with the selected imagery and all data input steps 
 
 ```{r}
 # Date 2015 -1
-Red.2015.1 <- raster("SAT Imagery/Red_05.06.2015.tiff")
-NIR.2015.1 <- raster("SAT Imagery/NIR_05.06.2015.tiff")
-
-# Date 2015 -2
-Red.2015.2 <- raster("SAT Imagery/Red_07.07.2015.tiff")
-NIR.2015.2 <- raster("SAT Imagery/NIR_07.07.2015.tiff")
+Red.2015.1 <- raster("SAT Imagery/Red.20.05.2015.tiff")
+NIR.2015.1 <- raster("SAT Imagery/NIR.20.05.2015.tiff")
 
 # Date 2016 -1
-Red.2016.1 <- raster("SAT Imagery/Red_07.06.2016.tiff")
-NIR.2016.1 <- raster("SAT Imagery/NIR_07.06.2016.tiff")
-
-# Date 2016 -2
-Red.2016.2 <- raster("SAT Imagery/Red_23.06.2016.tiff")
-NIR.2016.2 <- raster("SAT Imagery/NIR_23.06.2016.tiff")
+Red.2016.1 <- raster("SAT Imagery/Red.03.03.2016.tiff")
+NIR.2016.1 <- raster("SAT Imagery/NIR.03.03.2016.tiff")
 
 # Date 2017 -1
-Red.2017.1 <- raster("SAT Imagery/Red_10.06.2017.tiff")
-NIR.2017.1 <- raster("SAT Imagery/NIR_10.06.2017.tiff")
+Red.2017.1 <- raster("SAT Imagery/Red.22.05.2017.tiff")
+NIR.2017.1 <- raster("SAT Imagery/NIR.22.05.2017.tiff")
 
 # Date 2017 -2
-Red.2017.2 <- raster("SAT Imagery/Red_26.06.2017.tiff")
-NIR.2017.2 <- raster("SAT Imagery/NIR_26.06.2017.tiff")
+Red.2017.2 <- raster("SAT Imagery/Red.11.06.2017.tiff")
+NIR.2017.2 <- raster("SAT Imagery/NIR.11.06.2017.tiff")
 
 # Date 2018 -1
-Red.2018.1 <- raster("SAT Imagery/Red_22.05.2018.tiff")
-NIR.2018.1 <- raster("SAT Imagery/NIR_22.05.2018.tiff")
+Red.2018.1 <- raster("SAT Imagery/Red.28.03.2018.tiff")
+NIR.2018.1 <- raster("SAT Imagery/NIR.28.03.2018.tiff")
 
 # Date 2018 -2
-Red.2018.2 <- raster("SAT Imagery/Red_03.06.2018.tiff")
-NIR.2018.2 <- raster("SAT Imagery/NIR_03.06.2018.tiff")
+Red.2018.2 <- raster("SAT Imagery/Red.14.04.2018.tiff")
+NIR.2018.2 <- raster("SAT Imagery/NIR.14.04.2018.tiff")
 
 # Date 2019 -1
-Red.2019.1 <- raster("SAT Imagery/Red_14.04.2019.tiff")
-NIR.2019.1 <- raster("SAT Imagery/NIR_14.04.2019.tiff")
+Red.2019.1 <- raster("SAT Imagery/Red.14.04.2019.tiff")
+NIR.2019.1 <- raster("SAT Imagery/NIR.14.04.2019.tiff")
 
 # Date 2019 -2
-Red.2019.2 <- raster("SAT Imagery/Red_27.04.2019.tiff")
-NIR.2019.2 <- raster("SAT Imagery/NIR_27.04.2019.tiff")
+Red.2019.2 <- raster("SAT Imagery/Red.12.05.2019.tiff")
+NIR.2019.2 <- raster("SAT Imagery/NIR.12.05.2019.tiff")
 ```
 
 This section estimates NDVI considering that Landsat-8 satellite B4 corresponds to Red wave length and B5 to NIR wave length; Sentinel-2 satellite B4 corresponds to Red wave length and B8 to NIR wave length. Data is in raster format with a spatial resolution of 30x30m (Landsat-8) or 10x10m (Sentinel-2).
@@ -678,11 +666,9 @@ This section estimates NDVI considering that Landsat-8 satellite B4 corresponds 
 ```{r}
 # NDVI 2015
 NDVI_2015.1 <- (NIR.2015.1 - Red.2015.1) / (NIR.2015.1 + Red.2015.1)
-NDVI_2015.2 <- (NIR.2015.2 - Red.2015.2) / (NIR.2015.2 + Red.2015.2)
 
 # NDVI 2016
 NDVI_2016.1 <- (NIR.2016.1 - Red.2016.1) / (NIR.2016.1 + Red.2016.1)
-NDVI_2016.2 <- (NIR.2016.2 - Red.2016.2) / (NIR.2016.2 + Red.2016.2)
 
 # NDVI 2017
 NDVI_2017.1 <- (NIR.2017.1 - Red.2017.1) / (NIR.2017.1 + Red.2017.1)
@@ -729,8 +715,7 @@ First for 2015 ('ncol' means the number of columns up to a maximum limit of 4 fe
 
 ```{r}
 tmap_arrange(NDVI_2015.1_map, 
-             NDVI_2015.2_map, 
-             ncol=2)
+             ncol=1)
 ```
 ![Image description](NDVI_2015_Satellite.jpg)
 
@@ -739,8 +724,7 @@ For the remaining years:
 ```{r}
 # 2016
 tmap_arrange(NDVI_2016.1_map, 
-             NDVI_2016.2_map, 
-             ncol=2)
+             ncol=1)
              
 # 2017
 tmap_arrange(NDVI_2017.1_map, 
@@ -785,26 +769,18 @@ In the following section the script crops and masks the NDVI maps by the field v
 # Crop NDVI data 2015
 cropped_feature_2015.1 = crop(NDVI_2015.1, field_vector)
 plot (cropped_feature_2015.1)
-cropped_feature_2015.2 = crop(NDVI_2015.2, field_vector)
-plot (cropped_feature_2015.2)
 
 # Mask NDVI data 2015
 masked_feature_2015.1 = mask(NDVI_2015.1, field_vector)
 plot(masked_feature_2015.1)
-masked_feature_2015.2 = mask(NDVI_2015.2, field_vector)
-plot(masked_feature_2015.2)
 
 # Crop NDVI data 2016
 cropped_feature_2016.1 = crop(NDVI_2016.1, field_vector)
 plot (cropped_feature_2016.1)
-cropped_feature_2016.2 = crop(NDVI_2016.2, field_vector)
-plot (cropped_feature_2016.2)
 
 # Mask NDVI data 2016
 masked_feature_2016.1 = mask(NDVI_2016.1, field_vector)
 plot(masked_feature_2016.1)
-masked_feature_2016.2 = mask(NDVI_2016.2, field_vector)
-plot(masked_feature_2016.2)
 
 # Crop NDVI data 2017
 cropped_feature_2017.1 = crop(NDVI_2017.1, field_vector)
