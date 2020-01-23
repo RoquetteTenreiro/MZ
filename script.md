@@ -975,7 +975,7 @@ tmap_arrange(NDVI_points_2019.1,
              ncol=2)
 ```
 
-![Image description](Facets_2019.jpg)
+![Image description](Facets.jpg)
 
 ## 3 Geo-spatial analysis of field data
 
