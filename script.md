@@ -1213,24 +1213,23 @@ data.pca$rotation
 ```
 ![Image description](PCA.jpg)
 
-We observe that NDVI data are clustered for the first principal component, which explains about 28% of total variation, in two separate groups: 1) wheat and 2) sunflower + canola. Apparently, crops vigor might co-variate with geophysical properties in similar forms according to these two groups, highlighting the crop type effect on spatial correlations. All variables were analysed according to the PC-scores. The PC-scores were calculated as the sum of modules for each of the two principal components (capable to explain about 47% of total variation within the field). We aim to identify the highest correlations by selecting variables that are defined by the largest (and similar) space vectors within the PCA plot. These are the variables that reveal the largest co-variation within the field. We proceed to select all variables with PC-scores higher than 0.5 for the two principal components. Six variables are selected, four geophysical related (Elevation, Clay, pH and ECa1) and two crop (biological) based (NDVI 2017 and 2016). 
+We observe that NDVI data are clustered for the two first principal components, which explains about 50% of total variation. Apparently, crops vigor might co-variate with geophysical properties in similar forms according to the PC-scores. All variables were analysed according to these PC-scores. The PC-scores were calculated as the sum of modules for each of the two principal components. Here, we aim to identify the highest correlations (and co-variance) by selecting variables that are defined by the largest, and the most similar, space vectors within the PCA plot. We proceed to select all variables with PC-scores higher than 0.5 for the two principal components. Eight variables are selected, four geophysical related (Elevation, Clay, pH and ECa1) and four crop (biological) based (all except NDVI.2016). 
 
-| Variable	| PC1	| PC2	| Mod-PC1 |Mod-PC2|	PC-score | Water stress |	Crop |
-|-----------|-----|-----|------------|----------|----------|--------------|------|
-|**Elevation**	| 0.246073496	|-0.506219	|0.246073496	|0.506219	|**0.752292496** |	*not applicable* |*not applicable* |
-|Orientation|	-0.275479193	| -0.0846252 |	0.275479193	| 0.0846252	| 0.360104393	|	*not applicable* |*not applicable* |
-|**Clay**	|-0.420774692|	-0.1664644|	0.420774692	|0.1664644|	**0.587239092**		|*not applicable* |*not applicable*|
-|Sand	|0.352315578|	0.0992921	|0.352315578	|0.0992921	|0.451607678		|*not applicable* |*not applicable*|
-|**pH**	|-0.404608422|	0.2629256|	0.404608422|	0.2629256|	**0.667534022**		|*not applicable* |*not applicable*|
-|**ECa1**	|-0.395116982	|0.116692|	0.395116982	|0.116692|	**0.511808982**		|*not applicable* |*not applicable*|
-|ECa2   | -0.318056254|	-0.0449851|	0.318056254     |0.0449851	|0.363041354|  *not applicable* |*not applicable*|
-|NDVI	2019|	-0.020251927|	0.3492063	|0.020251927|	0.3492063|	0.369458227	|0.46	|Canola|
-| NDVI	2018	| 0.246998629|	0.1780563|	0.246998629|	0.1780563	|0.425054929	|0.06	|Wheat|
-|**NDVI 2017**|	-0.003134472	|0.511726	|0.003134472	|0.511726|	**0.514860472**	|0.29	|Sunflower|
-|**NDVI	2016**|	0.281983167|	0.3287212	|0.281983167|	0.3287212	|**0.610704367**|	0.27	|Wheat|
-|NDVI	2015|	0.021294623	|0.3011159	|0.021294623	|0.3011159	|0.322410523|	0.47	|Sunflower|
+|Variable   | PC1	   | PC2	| Mod-PC1      | Mod-PC2       | PC-score   |
+|-----------|--------------|------------|--------------|---------------|------------|
+|Elevation  | 0.24132158   | 0.317673	| 0.24132158   | 0.317673      |0.55899458  |		
+|Orientation| -0.1754411   | -0.18746441| 0.1754411    | 0.18746441    |0.36290551  |
+|ECa1	    | -0.4495746   | -0.05953766| 0.4495746    | 0.05953766    | 0.50911226 |	
+|ECa2	    |-0.40322073   | 0.09346027	| 0.40322073   |0.09346027     |0.496681    |
+|Clay	    |-0.31757553   |-0.21580432	| 0.31757553   |0.21580432     |0.53337985  |	
+|pH	    |-0.2830250    |-0.43567483 | 0.28302501   |0.43567483     |0.71869984  |
+|Sand       |0.30208817	   |0.14529952	|0.30208817    |0.14529952     |0.44738769  |	
+|NDVI.2019	|0.07885278	|-0.43103266	|0.07885278	|0.43103266 |0.50988544|
+|NDVI.2018	|0.22679201	|-0.33216181    |0.22679201	|0.33216181 |0.55895382|
+|NDVI.2017	|0.2526392	|-0.44934135    |0.2526392	|0.44934135 |0.70198055|	
+|NDVI.2016	|0.30291634	|-0.14504854    |0.30291634	|0.14504854 |0.44796488|	
+|NDVI.2015	|0.24663366	|-0.27404023    |0.24663366	|0.27404023 |0.52067389|	
 
-Water stress is determined as the division of gross season rainfall by growing season ET0. Considering the high water retention capacity of these soils, gross season rainfall was considered from September to the harvesting date, while season ET0 was considered for the aproximated growing season: November-June in the case of winter wheat, March-August for Sunflower, and October-May for canola. A water stress index of 0 means full requirements covered (i.e. total ET0 fully covered by season rainfall), a water stress of 30% means that season rainfall was 70% of total ET0, a water stress of 0 would mean absolute lack of rainfall. Data collected from: http://www.juntadeandalucia.es/agriculturaypesca/
 
 ### 4.2 Build dataframe for k-means clustering
 
