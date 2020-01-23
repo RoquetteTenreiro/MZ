@@ -1063,9 +1063,7 @@ MZ_joined = st_join(MZ_joined, NDVI_vector_2018.2["NDVI_2018.2"], join = st_near
 MZ_joined = st_join(MZ_joined, NDVI_vector_2017.1["NDVI_2017.1"], join = st_nearest_feature)
 MZ_joined = st_join(MZ_joined, NDVI_vector_2017.2["NDVI_2017.2"], join = st_nearest_feature)
 MZ_joined = st_join(MZ_joined, NDVI_vector_2016.1["NDVI_2016.1"], join = st_nearest_feature)
-MZ_joined = st_join(MZ_joined, NDVI_vector_2016.2["NDVI_2016.2"], join = st_nearest_feature)
 MZ_joined = st_join(MZ_joined, NDVI_vector_2015.1["NDVI_2015.1"], join = st_nearest_feature)
-MZ_joined = st_join(MZ_joined, NDVI_vector_2015.2["NDVI_2015.2"], join = st_nearest_feature)
 
 MZ_joined = st_join(MZ_joined, GF_Elevation_dots["Elevation"], join = st_nearest_feature)
 MZ_joined = st_join(MZ_joined, GF_Orientation_dots["Orientation"], join = st_nearest_feature)
@@ -1101,7 +1099,7 @@ names(Sampling_vector)[names(Sampling_vector) == "PH"] <- "pH"
 names(Sampling_vector)[names(Sampling_vector) == "ARENA"] <- "Sand"
 ```
 
-A few sampling photos
+A few sampling photos:
 
 ```{r}
 #Define file path
@@ -1169,13 +1167,11 @@ Printed results:
 |pH | 3.32%| - | - |
 |Clay   | 6.65%| Sand| 25.97%|
 |Orientation | 61.83 %|Elevation |4.86%|
-|ECa1 | 39.38%|ECa2 | 26.77%|
-|NDVI_2019.1 | 13.16%|NDVI_2019.2 | 11.97%|
-|NDVI_2018.1 | 16.53%|NDVI_2018.2 | 18.01%|
-|NDVI_2017.1 | 10.08%|NDVI_2017.2 | 11.13%|
-|NDVI_2016.1 | 10.21%|NDVI_2016.2 | 7.47%|
-|NDVI_2015.1 | 13.99%|NDVI_2015.2 | 10.68%|
-
+|ECa1 | 39.42%|ECa2 | 26.77%|
+|NDVI_2019.1 | 13.21%|NDVI_2019.2 | 16.59%|
+|NDVI_2018.1 | 7.84% |NDVI_2018.2 | 15.67%|
+|NDVI_2017.1 | 7.66%|NDVI_2017.2 | 16.43%|
+|NDVI_2016.1 | 4.83%|NDVI_2015.1 | 7.46%|
 
 According to Oliver. (2010), we consider as low, medium or high CV all values, respectively, ranged below 10%, between 10 and 25% and above 25%. 
 
