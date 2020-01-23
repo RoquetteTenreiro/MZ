@@ -88,9 +88,536 @@ knitr::opts_knit$set(root.dir = "C:/Users/Tomas R. Tenreiro/Desktop/Experimental
 
 ## 2 Historical remote sensing data
 
-### 1.1 Input material
+### 1.1 Input material - Time-series analysis of vegetation indices
 
 This section uploads all input material. In this particular case, we will work with satellite data (Landsat-8 and Sentinel-2), atmospherically corrected (and cloud cover < 4%), that was downloaded from EO-browser (https://apps.sentinel-hub.com/). The script considers imagery from five different growing seasons (i.e. 2015, 2016, 2017, 2018 and 2019). In order to explore spatial correlation between plant vigor and soil properties under rainfed conditions, we focused on late phenological stages before crop senescence. The two consecutive images taken imediatly after flowering stage were selected for each year. 2015 and 2017 imagery corresponds to a sunflower crop, 2016 and 2018 to a winter wheat crop and 2019 imagery corresponds to a canola crop. 
+
+As done by by Sallah et al. (2019), a time-series analysis of plot mean NDVI was conducted in order to estimate three determinant dates, i.e. sowing date, crop maximum canopy cover date, starting date of crop senescence. 
+
+- Sallah, A. H. M., Tychon, B., Piccard, I., Gobin, A., Van Hoolst, R., Djaby, B., & Wellens, J. (2019). Batch-processing of AquaCrop plug-in for rainfed maize using satellite derived Fractional Vegetation Cover data. Agricultural water management, 217, 346-355.
+
+```{r}
+
+# Time-series as proposed by Sallah et al., 2019 
+
+# Upload 2018 Satellite NDVI data
+R.2018.ts.1  <- raster("SAT Imagery/Time-series/Red.26.10.2017.tiff")
+R.2018.ts.2  <- raster("SAT Imagery/Time-series/Red.15.11.2017.tiff")
+R.2018.ts.3  <- raster("SAT Imagery/Time-series/Red.05.12.2017.tiff")
+R.2018.ts.4  <- raster("SAT Imagery/Time-series/Red.18.12.2017.tiff")
+R.2018.ts.5  <- raster("SAT Imagery/Time-series/Red.12.01.2018.tiff")
+R.2018.ts.6  <- raster("SAT Imagery/Time-series/Red.24.01.2018.tiff")
+R.2018.ts.7  <- raster("SAT Imagery/Time-series/Red.28.03.2018.tiff")
+R.2018.ts.8  <- raster("SAT Imagery/Time-series/Red.14.04.2018.tiff")
+R.2018.ts.9  <- raster("SAT Imagery/Time-series/Red.22.05.2018.tiff")
+R.2018.ts.10  <- raster("SAT Imagery/Time-series/Red.13.06.2018.tiff")
+
+N.2018.ts.1  <- raster("SAT Imagery/Time-series/NIR.26.10.2017.tiff")
+N.2018.ts.2  <- raster("SAT Imagery/Time-series/NIR.15.11.2017.tiff")
+N.2018.ts.3  <- raster("SAT Imagery/Time-series/NIR.05.12.2017.tiff")
+N.2018.ts.4  <- raster("SAT Imagery/Time-series/NIR.18.12.2017.tiff")
+N.2018.ts.5  <- raster("SAT Imagery/Time-series/NIR.12.01.2018.tiff")
+N.2018.ts.6  <- raster("SAT Imagery/Time-series/NIR.24.01.2018.tiff")
+R.2018.ts.7  <- raster("SAT Imagery/Time-series/Red.28.03.2018.tiff")
+N.2018.ts.8  <- raster("SAT Imagery/Time-series/NIR.14.04.2018.tiff")
+N.2018.ts.9  <- raster("SAT Imagery/Time-series/NIR.22.05.2018.tiff")
+N.2018.ts.10  <- raster("SAT Imagery/Time-series/NIR.13.06.2018.tiff")
+
+NDVI.ts.1 <- (N.2018.ts.1 - R.2018.ts.1) / (N.2018.ts.1 + R.2018.ts.1)
+NDVI.ts.2 <- (N.2018.ts.2 - R.2018.ts.2) / (N.2018.ts.2 + R.2018.ts.2)
+NDVI.ts.3 <- (N.2018.ts.3 - R.2018.ts.3) / (N.2018.ts.3 + R.2018.ts.3)
+NDVI.ts.4 <- (N.2018.ts.4 - R.2018.ts.4) / (N.2018.ts.4 + R.2018.ts.4)
+NDVI.ts.5 <- (N.2018.ts.5 - R.2018.ts.5) / (N.2018.ts.5 + R.2018.ts.5)
+NDVI.ts.6 <- (N.2018.ts.6 - R.2018.ts.6) / (N.2018.ts.6 + R.2018.ts.6)
+NDVI.ts.7 <- (N.2018.ts.7 - R.2018.ts.7) / (N.2018.ts.7 + R.2018.ts.7)
+NDVI.ts.8 <- (N.2018.ts.8 - R.2018.ts.8) / (N.2018.ts.8 + R.2018.ts.8)
+NDVI.ts.9 <- (N.2018.ts.9 - R.2018.ts.9) / (N.2018.ts.9 + R.2018.ts.9)
+NDVI.ts.10 <- (N.2018.ts.10 - R.2018.ts.10) / (N.2018.ts.10 + R.2018.ts.10)
+
+# Mask 
+masked_2018.1 = mask(NDVI.ts.1, field_vector)
+masked_2018.2 = mask(NDVI.ts.2, field_vector)
+masked_2018.3 = mask(NDVI.ts.3, field_vector)
+masked_2018.4 = mask(NDVI.ts.4, field_vector)
+masked_2018.5 = mask(NDVI.ts.5, field_vector)
+masked_2018.6 = mask(NDVI.ts.6, field_vector)
+masked_2018.7 = mask(NDVI.ts.7, field_vector)
+masked_2018.8 = mask(NDVI.ts.8, field_vector)
+masked_2018.9 = mask(NDVI.ts.9, field_vector)
+masked_2018.10 = mask(NDVI.ts.10, field_vector)
+
+# vectorize
+vector_2018.1 <- rasterToPoints(masked_2018.1, spatial = TRUE) %>% st_as_sf()
+vector_2018.2 <- rasterToPoints(masked_2018.2, spatial = TRUE) %>% st_as_sf()
+vector_2018.3 <- rasterToPoints(masked_2018.3, spatial = TRUE) %>% st_as_sf()
+vector_2018.4 <- rasterToPoints(masked_2018.4, spatial = TRUE) %>% st_as_sf()
+vector_2018.5 <- rasterToPoints(masked_2018.5, spatial = TRUE) %>% st_as_sf()
+vector_2018.6 <- rasterToPoints(masked_2018.6, spatial = TRUE) %>% st_as_sf()
+vector_2018.7 <- rasterToPoints(masked_2018.7, spatial = TRUE) %>% st_as_sf()
+vector_2018.8 <- rasterToPoints(masked_2018.8, spatial = TRUE) %>% st_as_sf()
+vector_2018.9 <- rasterToPoints(masked_2018.9, spatial = TRUE) %>% st_as_sf()
+vector_2018.10 <- rasterToPoints(masked_2018.10, spatial = TRUE) %>% st_as_sf()
+
+# Get mean
+vector_2018.1$geometry <- NULL
+vector_2018.2$geometry <- NULL
+vector_2018.3$geometry <- NULL
+vector_2018.4$geometry <- NULL
+vector_2018.5$geometry <- NULL
+vector_2018.6$geometry <- NULL
+vector_2018.7$geometry <- NULL
+vector_2018.8$geometry <- NULL
+vector_2018.9$geometry <- NULL
+vector_2018.10$geometry <- NULL
+
+NDVI_1 <- mean(vector_2018.1$layer)
+NDVI_2 <- mean(vector_2018.2$layer)
+NDVI_3 <- mean(vector_2018.3$layer)
+NDVI_4 <- mean(vector_2018.4$layer)
+NDVI_5 <- mean(vector_2018.5$layer)
+NDVI_6 <- mean(vector_2018.6$layer)
+NDVI_7 <- mean(vector_2018.7$layer)
+NDVI_8 <- mean(vector_2018.8$layer)
+NDVI_9 <- mean(vector_2018.9$layer)
+NDVI_10 <- mean(vector_2018.10$layer)
+
+# Time-series
+rm(time_series)
+time_series <- data.frame(matrix(ncol = 3, nrow = 10))
+colnames(time_series) <- c("NDVI_2018","Date","note")
+
+time_series$NDVI_2018 <- matrix(c(NDVI_1, NDVI_2, NDVI_3, NDVI_4, NDVI_5, NDVI_6,
+                         NDVI_7, NDVI_8, NDVI_9, NDVI_10),ncol=1,byrow = TRUE)
+
+dates <- c("11/15/17", "11/26/17", "12/05/17", "12/18/17", "01/12/18", "01/24/18","03/25/18","04/14/18", "05/22/18", "06/13/18")
+b_dates <- as.Date(dates, "%m/%d/%y")
+time_series$Date <- b_dates
+
+time_series$note <- matrix(c("", "", "", "Emergence (18/12)", "", "","CC_MAX(28/03)",
+                         "", "", ""),ncol=1,byrow = TRUE)
+
+#install.packages("imputeTS")
+#library(imputeTS)
+
+g1 <- ggplot(time_series, aes(x = Date, y = NDVI_2018)) +
+  geom_text(aes(label=note), hjust = -0.1, angle = 0) +
+	geom_line(color='darkgreen', size=2, alpha=0.4, linetype=2) + geom_point(shape=21, color="black", fill="#69b3a2", size=6) +
+	scale_x_date(date_labels = "%m / %Y", date_breaks = "1 month") +
+	theme_classic() + ylim(0, 1) + xlim(as.Date(c('15/10/2017', '20/07/2018'), format="%d/%m/%Y")) +
+  geom_area(fill = "darkolivegreen2", alpha=0.4)
+
+###########################################
+###########################################
+
+# Upload 2019 Satellite NDVI data
+R.2019.ts.1  <- raster("SAT Imagery/Time-series/Red.13.11.2018.tiff")
+R.2019.ts.2  <- raster("SAT Imagery/Time-series/Red.05.12.2018.tiff")
+R.2019.ts.3  <- raster("SAT Imagery/Time-series/Red.23.12.2018.tiff")
+R.2019.ts.4  <- raster("SAT Imagery/Time-series/Red.09.01.2019.tiff")
+R.2019.ts.5  <- raster("SAT Imagery/Time-series/Red.28.02.2019.tiff")
+R.2019.ts.6  <- raster("SAT Imagery/Time-series/Red.20.03.2019.tiff")
+R.2019.ts.7  <- raster("SAT Imagery/Time-series/Red.14.04.2019.tiff")
+R.2019.ts.8  <- raster("SAT Imagery/Time-series/Red.12.05.2019.tiff")
+R.2019.ts.9  <- raster("SAT Imagery/Time-series/Red.01.06.2019.tiff")
+
+N.2019.ts.1  <- raster("SAT Imagery/Time-series/NIR.13.11.2018.tiff")
+N.2019.ts.2  <- raster("SAT Imagery/Time-series/NIR.05.12.2018.tiff")
+N.2019.ts.3  <- raster("SAT Imagery/Time-series/NIR.23.12.2018.tiff")
+N.2019.ts.4  <- raster("SAT Imagery/Time-series/NIR.09.01.2019.tiff")
+N.2019.ts.5  <- raster("SAT Imagery/Time-series/NIR.28.02.2019.tiff")
+N.2019.ts.6  <- raster("SAT Imagery/Time-series/NIR.20.03.2019.tiff")
+N.2019.ts.7  <- raster("SAT Imagery/Time-series/NIR.14.04.2019.tiff")
+N.2019.ts.8  <- raster("SAT Imagery/Time-series/NIR.12.05.2019.tiff")
+N.2019.ts.9  <- raster("SAT Imagery/Time-series/NIR.01.06.2019.tiff")
+
+NDVI.ts.1 <- (N.2019.ts.1 - R.2019.ts.1) / (N.2019.ts.1 + R.2019.ts.1)
+NDVI.ts.2 <- (N.2019.ts.2 - R.2019.ts.2) / (N.2019.ts.2 + R.2019.ts.2)
+NDVI.ts.3 <- (N.2019.ts.3 - R.2019.ts.3) / (N.2019.ts.3 + R.2019.ts.3)
+NDVI.ts.4 <- (N.2019.ts.4 - R.2019.ts.4) / (N.2019.ts.4 + R.2019.ts.4)
+NDVI.ts.5 <- (N.2019.ts.5 - R.2019.ts.5) / (N.2019.ts.5 + R.2019.ts.5)
+NDVI.ts.6 <- (N.2019.ts.6 - R.2019.ts.6) / (N.2019.ts.6 + R.2019.ts.6)
+NDVI.ts.7 <- (N.2019.ts.7 - R.2019.ts.7) / (N.2019.ts.7 + R.2019.ts.7)
+NDVI.ts.8 <- (N.2019.ts.8 - R.2019.ts.8) / (N.2019.ts.8 + R.2019.ts.8)
+NDVI.ts.9 <- (N.2019.ts.9 - R.2019.ts.9) / (N.2019.ts.9 + R.2019.ts.9)
+
+# Mask 
+masked_2019.1 = mask(NDVI.ts.1, field_vector)
+masked_2019.2 = mask(NDVI.ts.2, field_vector)
+masked_2019.3 = mask(NDVI.ts.3, field_vector)
+masked_2019.4 = mask(NDVI.ts.4, field_vector)
+masked_2019.5 = mask(NDVI.ts.5, field_vector)
+masked_2019.6 = mask(NDVI.ts.6, field_vector)
+masked_2019.7 = mask(NDVI.ts.7, field_vector)
+masked_2019.8 = mask(NDVI.ts.8, field_vector)
+masked_2019.9 = mask(NDVI.ts.9, field_vector)
+
+# vectorize
+vector_2019.1 <- rasterToPoints(masked_2019.1, spatial = TRUE) %>% st_as_sf()
+vector_2019.2 <- rasterToPoints(masked_2019.2, spatial = TRUE) %>% st_as_sf()
+vector_2019.3 <- rasterToPoints(masked_2019.3, spatial = TRUE) %>% st_as_sf()
+vector_2019.4 <- rasterToPoints(masked_2019.4, spatial = TRUE) %>% st_as_sf()
+vector_2019.5 <- rasterToPoints(masked_2019.5, spatial = TRUE) %>% st_as_sf()
+vector_2019.6 <- rasterToPoints(masked_2019.6, spatial = TRUE) %>% st_as_sf()
+vector_2019.7 <- rasterToPoints(masked_2019.7, spatial = TRUE) %>% st_as_sf()
+vector_2019.8 <- rasterToPoints(masked_2019.8, spatial = TRUE) %>% st_as_sf()
+vector_2019.9 <- rasterToPoints(masked_2019.9, spatial = TRUE) %>% st_as_sf()
+
+# Get mean
+vector_2019.1$geometry <- NULL
+vector_2019.2$geometry <- NULL
+vector_2019.3$geometry <- NULL
+vector_2019.4$geometry <- NULL
+vector_2019.5$geometry <- NULL
+vector_2019.6$geometry <- NULL
+vector_2019.7$geometry <- NULL
+vector_2019.8$geometry <- NULL
+vector_2019.9$geometry <- NULL
+
+NDVI_1 <- mean(vector_2019.1$layer)
+NDVI_2 <- mean(vector_2019.2$layer)
+NDVI_3 <- mean(vector_2019.3$layer)
+NDVI_4 <- mean(vector_2019.4$layer)
+NDVI_5 <- mean(vector_2019.5$layer)
+NDVI_6 <- mean(vector_2019.6$layer)
+NDVI_7 <- mean(vector_2019.7$layer)
+NDVI_8 <- mean(vector_2019.8$layer)
+NDVI_9 <- mean(vector_2019.9$layer)
+
+# Time-series
+rm(time_series)
+time_series <- data.frame(matrix(ncol = 3, nrow = 9))
+colnames(time_series) <- c("NDVI_2019","Date","note")
+
+
+time_series$NDVI_2019 <- matrix(c(NDVI_1, NDVI_2, NDVI_3, NDVI_4, NDVI_5, NDVI_6,
+                         NDVI_7, NDVI_8, NDVI_9),ncol=1,byrow = TRUE)
+
+dates <- c("11/13/18", "12/05/18", "12/23/18", "01/09/19", "02/28/19","03/20/19", "04/10/19", "05/12/19", "06/01/19")
+b_dates <- as.Date(dates, "%m/%d/%y")
+time_series$Date <- b_dates
+
+time_series$note <- matrix(c("Emergence (13/11)", "", "", "", "", "",
+                         "CC_MAX (10/04)", "", ""),ncol=1,byrow = TRUE)
+
+g2 <- ggplot(time_series, aes(x = Date, y = NDVI_2019)) +
+  geom_text(aes(label=note), hjust = -0.1, angle = 0) +
+	geom_line(color='darkgreen', size=2, alpha=0.4, linetype=2) + geom_point(shape=21, color="black", fill="#69b3a2", size=6) +
+	scale_x_date(date_labels = "%m / %Y", date_breaks = "1 month") +
+	theme_classic() + ylim(0, 1) + xlim(as.Date(c('15/10/2018', '20/07/2019'), format="%d/%m/%Y")) +
+  geom_area(fill = "darkolivegreen2", alpha=0.4)
+
+###########################################
+###########################################
+
+# Upload 2017 Satellite NDVI data
+
+R.2017.ts.1  <- raster("SAT Imagery/Time-series/Red.10.03.2017.tiff")
+R.2017.ts.2  <- raster("SAT Imagery/Time-series/Red.20.03.2017.tiff")
+R.2017.ts.3  <- raster("SAT Imagery/Time-series/Red.12.04.2017.tiff")
+R.2017.ts.4  <- raster("SAT Imagery/Time-series/Red.22.04.2017.tiff")
+R.2017.ts.5  <- raster("SAT Imagery/Time-series/Red.02.05.2017.tiff")
+R.2017.ts.6  <- raster("SAT Imagery/Time-series/Red.22.05.2017.tiff")
+R.2017.ts.7  <- raster("SAT Imagery/Time-series/Red.11.06.2017.tiff")
+R.2017.ts.8 <- raster("SAT Imagery/Time-series/Red.21.06.2017.tiff")
+R.2017.ts.9 <- raster("SAT Imagery/Time-series/Red.11.07.2017.tiff")
+
+N.2017.ts.1  <- raster("SAT Imagery/Time-series/NIR.10.03.2017.tiff")
+N.2017.ts.2  <- raster("SAT Imagery/Time-series/NIR.20.03.2017.tiff")
+N.2017.ts.3  <- raster("SAT Imagery/Time-series/NIR.12.04.2017.tiff")
+N.2017.ts.4  <- raster("SAT Imagery/Time-series/NIR.22.04.2017.tiff")
+N.2017.ts.5  <- raster("SAT Imagery/Time-series/NIR.02.05.2017.tiff")
+N.2017.ts.6  <- raster("SAT Imagery/Time-series/NIR.22.05.2017.tiff")
+N.2017.ts.7  <- raster("SAT Imagery/Time-series/NIR.11.06.2017.tiff")
+N.2017.ts.8 <- raster("SAT Imagery/Time-series/NIR.21.06.2017.tiff")
+R.2017.ts.9 <- raster("SAT Imagery/Time-series/Red.11.07.2017.tiff")
+
+NDVI.ts.1 <- (N.2017.ts.1 - R.2017.ts.1) / (N.2017.ts.1 + R.2017.ts.1)
+NDVI.ts.2 <- (N.2017.ts.2 - R.2017.ts.2) / (N.2017.ts.2 + R.2017.ts.2)
+NDVI.ts.3 <- (N.2017.ts.3 - R.2017.ts.3) / (N.2017.ts.3 + R.2017.ts.3)
+NDVI.ts.4 <- (N.2017.ts.4 - R.2017.ts.4) / (N.2017.ts.4 + R.2017.ts.4)
+NDVI.ts.5 <- (N.2017.ts.5 - R.2017.ts.5) / (N.2017.ts.5 + R.2017.ts.5)
+NDVI.ts.6 <- (N.2017.ts.6 - R.2017.ts.6) / (N.2017.ts.6 + R.2017.ts.6)
+NDVI.ts.7 <- (N.2017.ts.7 - R.2017.ts.7) / (N.2017.ts.7 + R.2017.ts.7)
+NDVI.ts.8 <- (N.2017.ts.8 - R.2017.ts.8) / (N.2017.ts.8 + R.2017.ts.8)
+NDVI.ts.9 <- (N.2017.ts.9 - R.2017.ts.9) / (N.2017.ts.9 + R.2017.ts.9)
+
+# Mask 
+masked_2017.1 = mask(NDVI.ts.1, field_vector)
+masked_2017.2 = mask(NDVI.ts.2, field_vector)
+masked_2017.3 = mask(NDVI.ts.3, field_vector)
+masked_2017.4 = mask(NDVI.ts.4, field_vector)
+masked_2017.5 = mask(NDVI.ts.5, field_vector)
+masked_2017.6 = mask(NDVI.ts.6, field_vector)
+masked_2017.7 = mask(NDVI.ts.7, field_vector)
+masked_2017.8 = mask(NDVI.ts.8, field_vector)
+masked_2017.9 = mask(NDVI.ts.9, field_vector)
+
+# vectorize
+vector_2017.1 <- rasterToPoints(masked_2017.1, spatial = TRUE) %>% st_as_sf()
+vector_2017.2 <- rasterToPoints(masked_2017.2, spatial = TRUE) %>% st_as_sf()
+vector_2017.3 <- rasterToPoints(masked_2017.3, spatial = TRUE) %>% st_as_sf()
+vector_2017.4 <- rasterToPoints(masked_2017.4, spatial = TRUE) %>% st_as_sf()
+vector_2017.5 <- rasterToPoints(masked_2017.5, spatial = TRUE) %>% st_as_sf()
+vector_2017.6 <- rasterToPoints(masked_2017.6, spatial = TRUE) %>% st_as_sf()
+vector_2017.7 <- rasterToPoints(masked_2017.7, spatial = TRUE) %>% st_as_sf()
+vector_2017.8 <- rasterToPoints(masked_2017.8, spatial = TRUE) %>% st_as_sf()
+vector_2017.9 <- rasterToPoints(masked_2017.9, spatial = TRUE) %>% st_as_sf()
+
+# Get mean
+vector_2017.1$geometry <- NULL
+vector_2017.2$geometry <- NULL
+vector_2017.3$geometry <- NULL
+vector_2017.4$geometry <- NULL
+vector_2017.5$geometry <- NULL
+vector_2017.6$geometry <- NULL
+vector_2017.7$geometry <- NULL
+vector_2017.8$geometry <- NULL
+vector_2017.9$geometry <- NULL
+
+NDVI_1 <- mean(vector_2017.1$layer)
+NDVI_2 <- mean(vector_2017.2$layer)
+NDVI_3 <- mean(vector_2017.3$layer)
+NDVI_4 <- mean(vector_2017.4$layer)
+NDVI_5 <- mean(vector_2017.5$layer)
+NDVI_6 <- mean(vector_2017.6$layer)
+NDVI_7 <- mean(vector_2017.7$layer)
+NDVI_8 <- mean(vector_2017.8$layer)
+NDVI_9 <- mean(vector_2017.9$layer)
+
+# Time-series
+rm(time_series)
+time_series <- data.frame(matrix(ncol = 3, nrow = 9))
+colnames(time_series) <- c("NDVI_2017","Date","note")
+
+
+time_series$NDVI_2017 <- matrix(c(NDVI_1, NDVI_2, NDVI_3, NDVI_4, NDVI_5, NDVI_6,
+                         NDVI_7, NDVI_8, NDVI_9),ncol=1,byrow = TRUE)
+
+dates <- c("03/10/17", "03/20/17", "04/12/17","04/22/17", "05/02/17", "05/22/17", "06/11/17", "06/21/17", "07/11/17")
+b_dates <- as.Date(dates, "%m/%d/%y")
+time_series$Date <- b_dates
+
+time_series$note <- matrix(c("", "", "", "Emergence (16/04)", "",
+                         "CC_MAX (22/05)", "", "", ""),ncol=1,byrow = TRUE)
+
+g3 <- ggplot(time_series, aes(x = Date, y = NDVI_2017)) +
+  geom_text(aes(label=note), hjust = -0.1, angle = 0) +
+	geom_line(color='darkgreen', size=2, alpha=0.4, linetype=2) + geom_point(shape=21, color="black", fill="#69b3a2", size=6) +
+	scale_x_date(date_labels = "%m / %Y", date_breaks = "1 month") +
+	theme_classic() + ylim(0, 1) + xlim(as.Date(c('15/10/2016', '20/07/2017'), format="%d/%m/%Y")) +
+  geom_area(fill = "darkolivegreen2", alpha=0.4)
+
+###########################################
+###########################################
+
+# Upload 2016 Satellite NDVI data
+
+R.2016.ts.0  <- raster("SAT Imagery/Time-series/Red.10.11.2015.tiff")
+R.2016.ts.1  <- raster("SAT Imagery/Time-series/Red.30.12.2015.tiff")
+R.2016.ts.2  <- raster("SAT Imagery/Time-series/Red.16.02.2016.tiff")
+R.2016.ts.3  <- raster("SAT Imagery/Time-series/Red.03.03.2016.tiff")
+R.2016.ts.4  <- raster("SAT Imagery/Time-series/Red.25.11.2015.tiff")
+R.2016.ts.5  <- raster("SAT Imagery/Time-series/Red.07.06.2016.tiff")
+R.2016.ts.6  <- raster("SAT Imagery/Time-series/Red.23.06.2016.tiff")
+R.2016.ts.7  <- raster("SAT Imagery/Time-series/Red.25.10.2015.tiff")
+
+N.2016.ts.0  <- raster("SAT Imagery/Time-series/NIR.10.11.2015.tiff")
+N.2016.ts.1  <- raster("SAT Imagery/Time-series/NIR.30.12.2015.tiff")
+N.2016.ts.2  <- raster("SAT Imagery/Time-series/NIR.16.02.2016.tiff")
+N.2016.ts.3  <- raster("SAT Imagery/Time-series/NIR.03.03.2016.tiff")
+N.2016.ts.4  <- raster("SAT Imagery/Time-series/NIR.25.11.2015.tiff")
+N.2016.ts.5  <- raster("SAT Imagery/Time-series/NIR.07.06.2016.tiff")
+N.2016.ts.6  <- raster("SAT Imagery/Time-series/NIR.23.06.2016.tiff")
+N.2016.ts.7  <- raster("SAT Imagery/Time-series/NIR.25.10.2015.tiff")
+
+NDVI.ts.0 <- (N.2016.ts.0 - R.2016.ts.0) / (N.2016.ts.0 + R.2016.ts.0)
+NDVI.ts.1 <- (N.2016.ts.1 - R.2016.ts.1) / (N.2016.ts.1 + R.2016.ts.1)
+NDVI.ts.2 <- (N.2016.ts.2 - R.2016.ts.2) / (N.2016.ts.2 + R.2016.ts.2)
+NDVI.ts.3 <- (N.2016.ts.3 - R.2016.ts.3) / (N.2016.ts.3 + R.2016.ts.3)
+NDVI.ts.4 <- (N.2016.ts.4 - R.2016.ts.4) / (N.2016.ts.4 + R.2016.ts.4)
+NDVI.ts.5 <- (N.2016.ts.5 - R.2016.ts.5) / (N.2016.ts.5 + R.2016.ts.5)
+NDVI.ts.6 <- (N.2016.ts.6 - R.2016.ts.6) / (N.2016.ts.6 + R.2016.ts.6)
+NDVI.ts.7 <- (N.2016.ts.7 - R.2016.ts.7) / (N.2016.ts.7 + R.2016.ts.7)
+
+# Mask 
+masked_2016.0 = mask(NDVI.ts.0, field_vector)
+masked_2016.1 = mask(NDVI.ts.1, field_vector)
+masked_2016.2 = mask(NDVI.ts.2, field_vector)
+masked_2016.3 = mask(NDVI.ts.3, field_vector)
+masked_2016.4 = mask(NDVI.ts.4, field_vector)
+masked_2016.5 = mask(NDVI.ts.5, field_vector)
+masked_2016.6 = mask(NDVI.ts.6, field_vector)
+masked_2016.7 = mask(NDVI.ts.7, field_vector)
+
+# vectorize
+vector_2016.0 <- rasterToPoints(masked_2016.0, spatial = TRUE) %>% st_as_sf()
+vector_2016.1 <- rasterToPoints(masked_2016.1, spatial = TRUE) %>% st_as_sf()
+vector_2016.2 <- rasterToPoints(masked_2016.2, spatial = TRUE) %>% st_as_sf()
+vector_2016.3 <- rasterToPoints(masked_2016.3, spatial = TRUE) %>% st_as_sf()
+vector_2016.4 <- rasterToPoints(masked_2016.4, spatial = TRUE) %>% st_as_sf()
+vector_2016.5 <- rasterToPoints(masked_2016.5, spatial = TRUE) %>% st_as_sf()
+vector_2016.6 <- rasterToPoints(masked_2016.6, spatial = TRUE) %>% st_as_sf()
+vector_2016.7 <- rasterToPoints(masked_2016.7, spatial = TRUE) %>% st_as_sf()
+
+# Get mean
+vector_2016.0$geometry <- NULL
+vector_2016.1$geometry <- NULL
+vector_2016.2$geometry <- NULL
+vector_2016.3$geometry <- NULL
+vector_2016.4$geometry <- NULL
+vector_2016.5$geometry <- NULL
+vector_2016.6$geometry <- NULL
+vector_2016.7$geometry <- NULL
+
+NDVI_0 <- mean(vector_2016.0$layer)
+NDVI_1 <- mean(vector_2016.1$layer)
+NDVI_2 <- mean(vector_2016.2$layer)
+NDVI_3 <- mean(vector_2016.3$layer)
+NDVI_4 <- mean(vector_2016.4$layer)
+NDVI_5 <- mean(vector_2016.5$layer)
+NDVI_6 <- mean(vector_2016.6$layer)
+NDVI_7 <- mean(vector_2016.7$layer)
+
+# Time-series
+rm(time_series)
+time_series <- data.frame(matrix(ncol = 3, nrow = 8))
+colnames(time_series) <- c("NDVI_2016","Date","note")
+
+time_series$NDVI_2016 <- matrix(c(NDVI_7, NDVI_0, NDVI_4, NDVI_1, NDVI_2, NDVI_3, NDVI_5, NDVI_6),ncol=1,byrow = TRUE)
+
+dates <- c("10/25/15", "11/10/15", "11/25/15", "12/30/15", "02/16/16", "03/03/16", "06/07/16", "06/23/16")
+b_dates <- as.Date(dates, "%m/%d/%y")
+time_series$Date <- b_dates
+
+time_series$note <- matrix(c("", "", "Emergence (25/11)",
+                         "", "", "CC_MAX (03/03)", "", ""),ncol=1,byrow = TRUE)
+
+g4 <- ggplot(time_series, aes(x = Date, y = NDVI_2016)) +
+  geom_text(aes(label=note), hjust = -0.1, angle = 0) +
+	geom_line(color='darkgreen', size=2, alpha=0.4, linetype=2) + geom_point(shape=21, color="black", fill="#69b3a2", size=6) +
+	scale_x_date(date_labels = "%m / %Y", date_breaks = "1 month") +
+	theme_classic() + ylim(0, 1) + xlim(as.Date(c('15/10/2015', '20/07/2016'), format="%d/%m/%Y")) +
+  geom_area(fill = "darkolivegreen2", alpha=0.4)
+
+###########################################
+###########################################
+
+# Upload 2015 Satellite NDVI data
+
+R.2015.ts.0  <- raster("SAT Imagery/Time-series/Red.11.12.2014.tiff")
+R.2015.ts.00  <- raster("SAT Imagery/Time-series/Red.28.01.2015.tiff")
+R.2015.ts.000  <- raster("SAT Imagery/Time-series/Red.13.02.2015.tiff")
+R.2015.ts.1  <- raster("SAT Imagery/Time-series/Red.01.03.2015.tiff")
+R.2015.ts.2  <- raster("SAT Imagery/Time-series/Red.18.04.2015.tiff")
+R.2015.ts.3  <- raster("SAT Imagery/Time-series/Red.20.05.2015.tiff")
+R.2015.ts.4  <- raster("SAT Imagery/Time-series/Red.05.06.2015.tiff")
+R.2015.ts.5  <- raster("SAT Imagery/Time-series/Red.21.06.2015.tiff")
+R.2015.ts.6  <- raster("SAT Imagery/Time-series/Red.07.07.2015.tiff")
+R.2015.ts.7  <- raster("SAT Imagery/Time-series/Red.23.07.2015.tiff")
+
+N.2015.ts.0  <- raster("SAT Imagery/Time-series/NIR.11.12.2014.tiff")
+N.2015.ts.00  <- raster("SAT Imagery/Time-series/NIR.28.01.2015.tiff")
+N.2015.ts.000  <- raster("SAT Imagery/Time-series/NIR.13.02.2015.tiff")
+N.2015.ts.1  <- raster("SAT Imagery/Time-series/NIR.01.03.2015.tiff")
+N.2015.ts.2  <- raster("SAT Imagery/Time-series/NIR.18.04.2015.tiff")
+N.2015.ts.3  <- raster("SAT Imagery/Time-series/NIR.20.05.2015.tiff")
+N.2015.ts.4  <- raster("SAT Imagery/Time-series/NIR.05.06.2015.tiff")
+N.2015.ts.5  <- raster("SAT Imagery/Time-series/NIR.21.06.2015.tiff")
+N.2015.ts.6  <- raster("SAT Imagery/Time-series/NIR.07.07.2015.tiff")
+N.2015.ts.7  <- raster("SAT Imagery/Time-series/NIR.23.07.2015.tiff")
+
+NDVI.ts.0 <- (N.2015.ts.0 - R.2015.ts.0) / (N.2015.ts.0 + R.2015.ts.0)
+NDVI.ts.00 <- (N.2015.ts.00 - R.2015.ts.00) / (N.2015.ts.00 + R.2015.ts.00)
+NDVI.ts.000 <- (N.2015.ts.000 - R.2015.ts.000) / (N.2015.ts.000 + R.2015.ts.000)
+
+NDVI.ts.1 <- (N.2015.ts.1 - R.2015.ts.1) / (N.2015.ts.1 + R.2015.ts.1)
+NDVI.ts.2 <- (N.2015.ts.2 - R.2015.ts.2) / (N.2015.ts.2 + R.2015.ts.2)
+NDVI.ts.3 <- (N.2015.ts.3 - R.2015.ts.3) / (N.2015.ts.3 + R.2015.ts.3)
+NDVI.ts.4 <- (N.2015.ts.4 - R.2015.ts.4) / (N.2015.ts.4 + R.2015.ts.4)
+NDVI.ts.5 <- (N.2015.ts.5 - R.2015.ts.5) / (N.2015.ts.5 + R.2015.ts.5)
+NDVI.ts.6 <- (N.2015.ts.6 - R.2015.ts.6) / (N.2015.ts.6 + R.2015.ts.6)
+NDVI.ts.7 <- (N.2015.ts.7 - R.2015.ts.7) / (N.2015.ts.7 + R.2015.ts.7)
+
+# Mask 
+masked_2015.0 = mask(NDVI.ts.0, field_vector)
+masked_2015.00 = mask(NDVI.ts.00, field_vector)
+masked_2015.000 = mask(NDVI.ts.000, field_vector)
+
+masked_2015.1 = mask(NDVI.ts.1, field_vector)
+masked_2015.2 = mask(NDVI.ts.2, field_vector)
+masked_2015.3 = mask(NDVI.ts.3, field_vector)
+masked_2015.4 = mask(NDVI.ts.4, field_vector)
+masked_2015.5 = mask(NDVI.ts.5, field_vector)
+masked_2015.6 = mask(NDVI.ts.6, field_vector)
+masked_2015.7 = mask(NDVI.ts.7, field_vector)
+
+# vectorize
+vector_2015.0 <- rasterToPoints(masked_2015.0, spatial = TRUE) %>% st_as_sf()
+vector_2015.00 <- rasterToPoints(masked_2015.00, spatial = TRUE) %>% st_as_sf()
+vector_2015.000 <- rasterToPoints(masked_2015.000, spatial = TRUE) %>% st_as_sf()
+
+vector_2015.1 <- rasterToPoints(masked_2015.1, spatial = TRUE) %>% st_as_sf()
+vector_2015.2 <- rasterToPoints(masked_2015.2, spatial = TRUE) %>% st_as_sf()
+vector_2015.3 <- rasterToPoints(masked_2015.3, spatial = TRUE) %>% st_as_sf()
+vector_2015.4 <- rasterToPoints(masked_2015.4, spatial = TRUE) %>% st_as_sf()
+vector_2015.5 <- rasterToPoints(masked_2015.5, spatial = TRUE) %>% st_as_sf()
+vector_2015.6 <- rasterToPoints(masked_2015.6, spatial = TRUE) %>% st_as_sf()
+vector_2015.7 <- rasterToPoints(masked_2015.7, spatial = TRUE) %>% st_as_sf()
+
+# Get mean
+vector_2015.0$geometry <- NULL
+vector_2015.00$geometry <- NULL
+vector_2015.000$geometry <- NULL
+
+vector_2015.1$geometry <- NULL
+vector_2015.2$geometry <- NULL
+vector_2015.3$geometry <- NULL
+vector_2015.4$geometry <- NULL
+vector_2015.5$geometry <- NULL
+vector_2015.6$geometry <- NULL
+vector_2015.7$geometry <- NULL
+
+NDVI_0 <- mean(vector_2015.0$layer)
+NDVI_00 <- mean(vector_2015.00$layer)
+NDVI_000 <- mean(vector_2015.000$layer)
+
+NDVI_1 <- mean(vector_2015.1$layer)
+NDVI_2 <- mean(vector_2015.2$layer)
+NDVI_3 <- mean(vector_2015.3$layer)
+NDVI_4 <- mean(vector_2015.4$layer)
+NDVI_5 <- mean(vector_2015.5$layer)
+NDVI_6 <- mean(vector_2015.6$layer)
+NDVI_7 <- mean(vector_2015.7$layer)
+
+# Time-series
+rm(time_series)
+time_series <- data.frame(matrix(ncol = 3, nrow = 7))
+colnames(time_series) <- c("NDVI_2015","Date","note")
+
+time_series$NDVI_2015 <- matrix(c(NDVI_1, NDVI_2, NDVI_3, NDVI_4, NDVI_5, NDVI_6, NDVI_7),ncol=1,byrow = TRUE)
+
+dates <- c("03/01/15", "04/18/15", "05/20/15", "06/05/15", "06/21/15", "07/07/15", "07/20/15")
+b_dates <- as.Date(dates, "%m/%d/%y")
+time_series$Date <- b_dates
+
+time_series$note <- matrix(c("Emergence (03/01)", "", "CC_MAX (20/05)", "", "", "", ""),ncol=1,byrow = TRUE)
+
+g5 <- ggplot(time_series, aes(x = Date, y = NDVI_2015)) +
+  geom_text(aes(label=note), vjust=-1, hjust = 0.2, angle = 0) +
+	geom_line(color='darkgreen', size=2, alpha=0.4, linetype=2) + geom_point(shape=21, color="black", fill="#69b3a2", size=6) +
+	scale_x_date(date_labels = "%m / %Y", date_breaks = "1 month") +
+	theme_classic() + ylim(0, 1) + xlim(as.Date(c('15/10/2014', '20/07/2015'), format="%d/%m/%Y")) +
+  geom_area(fill = "darkolivegreen2", alpha=0.4)
+
+grid.arrange(g5, g4, g3, g1, g2, ncol = 1, nrow = 5)
+
+```
+
+
+
+
+
+
 
 | Year | Crop             | Date 1     | Date 2     | Satellite   | Spatial Resolution |
 |------|------------------|------------|------------|-------------|---------------|
