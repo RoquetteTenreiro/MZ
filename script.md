@@ -739,6 +739,7 @@ tmap_arrange(NDVI_2019.1_map,
              NDVI_2019.2_map, 
              ncol=2)
 ```
+![Image description](NDVI_2019_Satellite.jpg)
 
 ### 2.5 Upload the field vector for clip operations
 
