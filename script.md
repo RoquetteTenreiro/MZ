@@ -616,12 +616,11 @@ In order to explore spatial correlations between plant vigor and soil properties
 
 | Year | Crop             | Emergence  | Max_CC     | Selected imagery  | Satellite   | Spatial Resolution |
 |------|------------------|------------|------------|-------------------|-------------|--------------------|
-| 2015 | Sunflower        | 18/04/2015 | 20/05/2015 |     20th May      | Landsat-8   | 30x30 m            |
-| 2016 | Wheat (durum)    | 25/11/2015 | 03/03/2016 |     3rd March     | Landsat-8   | 30x30 m            |
-| 2017 | Sunflower        | 16/04/2017 | 22/05/2017 |22th May + 11th June| Sentinel-2 | 30x30 m            |
-| 2018 | Wheat (durum)    | 18/12/2017 | 28/03/2018 |28th March + 14th April| Sentinel-2 | 10x10 m        |
-| 2019 | Canola           | 13/11/2018 | 14/04/2019 |14th April + 12th May| Sentinel-2   | 10x10 m        |
-
+| 2015 | Sunflower        | 18/04/2015 | 20/05/2015 |     20th May      | Landsat-8   | 30x30m            |
+| 2016 | Wheat (durum)    | 25/11/2015 | 03/03/2016 |     3rd March     | Landsat-8   | 30x30m            |
+| 2017 | Sunflower        | 16/04/2017 | 22/05/2017 |22th May + 11th June| Sentinel-2 | 10x10m            |
+| 2018 | Wheat (durum)    | 18/12/2017 | 28/03/2018 |28th March + 14th April| Sentinel-2 | 10x10m        |
+| 2019 | Canola           | 13/11/2018 | 14/04/2019 |14th April + 12th May| Sentinel-2   | 10x10m        |
 
 - Tesfamariam, E. H., Annandale, J. G., & Steyn, J. M. (2010). Water stress effects on winter canola growth and yield. Agronomy Journal, 102(2), 658-666.
 
