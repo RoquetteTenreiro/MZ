@@ -1155,9 +1155,7 @@ cv_NDVI_2018.2 = cv(MZ_joined$NDVI_2018.2)
 cv_NDVI_2017.1 = cv(MZ_joined$NDVI_2017.1)
 cv_NDVI_2017.2 = cv(MZ_joined$NDVI_2017.2)
 cv_NDVI_2016.1 = cv(MZ_joined$NDVI_2016.1)
-cv_NDVI_2016.2 = cv(MZ_joined$NDVI_2016.2)
 cv_NDVI_2015.1 = cv(MZ_joined$NDVI_2015.1)
-cv_NDVI_2015.2 = cv(MZ_joined$NDVI_2015.2)
 ```
 
 Printed results:
@@ -1165,8 +1163,8 @@ Printed results:
 | Variable | CV| Variable | CV |
 |----------|---|----------|----|
 |pH | 3.32%| - | - |
-|Clay   | 6.65%| Sand| 25.97%|
-|Orientation | 61.83 %|Elevation |4.86%|
+|Clay   | 6.65%| Sand| 25.94%|
+|Orientation | 61.21 %|Elevation |4.86%|
 |ECa1 | 39.42%|ECa2 | 26.77%|
 |NDVI_2019.1 | 13.21%|NDVI_2019.2 | 16.59%|
 |NDVI_2018.1 | 7.84% |NDVI_2018.2 | 15.67%|
@@ -1195,8 +1193,8 @@ library(cluster)
 MZ_joined$NDVI_2019 <- ((MZ_joined$NDVI_2019.1 + MZ_joined$NDVI_2019.2 / 2))
 MZ_joined$NDVI_2018 <- ((MZ_joined$NDVI_2018.1 + MZ_joined$NDVI_2018.2 / 2))
 MZ_joined$NDVI_2017 <- ((MZ_joined$NDVI_2017.1 + MZ_joined$NDVI_2017.2 / 2))
-MZ_joined$NDVI_2016 <- ((MZ_joined$NDVI_2016.1 + MZ_joined$NDVI_2016.2 / 2))
-MZ_joined$NDVI_2015 <- ((MZ_joined$NDVI_2015.1 + MZ_joined$NDVI_2015.2 / 2))
+MZ_joined$NDVI_2016 <- (MZ_joined$NDVI_2016.1)
+MZ_joined$NDVI_2015 <- (MZ_joined$NDVI_2015.1)
 
 MZ_joined$ID <- seq.int(nrow(MZ_joined))
 
@@ -1204,7 +1202,7 @@ rm(dataframe)
 dataframe = fortify(MZ_joined)
 dataframe$geometry <- NULL
 
-dataframe <- dataframe[,c(11:14,17:19,20:25)]
+dataframe <- dataframe[,c(9:12,15:17,18:23)]
 
 data.pca <- prcomp(dataframe[,c(1:12)], scale = TRUE)
 
