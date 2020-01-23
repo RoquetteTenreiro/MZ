@@ -90,9 +90,7 @@ knitr::opts_knit$set(root.dir = "C:/Users/Tomas R. Tenreiro/Desktop/Experimental
 
 ### 1.1 Time-series analysis of vegetation indices
 
-This section uploads all input material. In this particular case, we will work with satellite data (Landsat-8 and Sentinel-2), atmospherically corrected (and cloud cover < 4%), that was downloaded from EO-browser (https://apps.sentinel-hub.com/). The script considers imagery from five different growing seasons (i.e. 2015, 2016, 2017, 2018 and 2019). In order to explore spatial correlation between plant vigor and soil properties under rainfed conditions, we focused on late phenological stages before crop senescence. The two consecutive images taken imediatly after flowering stage were selected for each year. 2015 and 2017 imagery corresponds to a sunflower crop, 2016 and 2018 to a winter wheat crop and 2019 imagery corresponds to a canola crop. 
-
-As done by by Sallah et al. (2019), a time-series analysis of plot mean NDVI was conducted in order to estimate three determinant dates, i.e. sowing date, crop maximum canopy cover date, starting date of crop senescence. 
+This section uploads all input material. In this particular case, we will work with satellite data (Landsat-8 and Sentinel-2), atmospherically corrected (and cloud cover < 4%), that was downloaded from EO-browser (https://apps.sentinel-hub.com/). The script considers imagery from five different growing seasons (i.e. 2015, 2016, 2017, 2018 and 2019). As done by by Sallah et al. (2019), a time-series analysis of plot mean NDVI was conducted in order to estimate the three most determinant dates, i.e. sowing date, crop maximum canopy cover date, and the starting date of crop senescence. 
 
 - Sallah, A. H. M., Tychon, B., Piccard, I., Gobin, A., Van Hoolst, R., Djaby, B., & Wellens, J. (2019). Batch-processing of AquaCrop plug-in for rainfed maize using satellite derived Fractional Vegetation Cover data. Agricultural water management, 217, 346-355.
 
@@ -612,10 +610,10 @@ g5 <- ggplot(time_series, aes(x = Date, y = NDVI_2015)) +
 grid.arrange(g5, g4, g3, g1, g2, ncol = 1, nrow = 5)
 
 ```
+![Image description](TS.jpg)
 
 
-
-
+In order to explore spatial correlation between plant vigor and soil properties under rainfed conditions, we focused on late phenological stages before crop senescence. The two consecutive images taken imediatly after flowering stage were selected for each year. 2015 and 2017 imagery corresponds to a sunflower crop, 2016 and 2018 to a winter wheat crop and 2019 imagery corresponds to a canola crop. 
 
 
 
