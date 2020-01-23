@@ -894,40 +894,27 @@ Which can be (interactively) zoomed in:
 ```{r}
 # From raster to point 2015
 NDVI_vector_2015.1 <- rasterToPoints(masked_feature_2015.1, spatial = TRUE) %>% st_as_sf()
-NDVI_vector_2015.2 <- rasterToPoints(masked_feature_2015.2, spatial = TRUE) %>% st_as_sf()
 
 # Correct feature name
 names(NDVI_vector_2015.1)[names(NDVI_vector_2015.1) == "layer"] <- "NDVI_2015.1"
-names(NDVI_vector_2015.2)[names(NDVI_vector_2015.2) == "layer"] <- "NDVI_2015.2"
 
 # Create maps for 2015
 NDVI_points_2015.1 <- tm_shape(NDVI_vector_2015.1) + tm_dots(col="NDVI_2015.1", palette="YlGn", n=10) + tm_style("cobalt") + 
 tm_legend(outside = TRUE, text.size = 1.2)
-NDVI_points_2015.2 <- tm_shape(NDVI_vector_2015.2) + tm_dots(col="NDVI_2015.2", palette="YlGn", n=10) + tm_style("cobalt") + 
-  tm_legend(outside = TRUE, text.size = 1.2)
-
-# Display facets
-tmap_arrange(NDVI_points_2015.1,
-             NDVI_points_2015.2,
-             ncol=2)
-             
+         
 # From raster to point 2016
 NDVI_vector_2016.1 <- rasterToPoints(masked_feature_2016.1, spatial = TRUE) %>% st_as_sf()
-NDVI_vector_2016.2 <- rasterToPoints(masked_feature_2016.2, spatial = TRUE) %>% st_as_sf()
 
 # Correct feature name
 names(NDVI_vector_2016.1)[names(NDVI_vector_2016.1) == "layer"] <- "NDVI_2016.1"
-names(NDVI_vector_2016.2)[names(NDVI_vector_2016.2) == "layer"] <- "NDVI_2016.2"
 
 # Create maps for 2016
 NDVI_points_2016.1 <- tm_shape(NDVI_vector_2016.1) + tm_dots(col="NDVI_2016.1", palette="YlGn", n=10) + tm_style("cobalt") + 
 tm_legend(outside = TRUE, text.size = 1.2)
-NDVI_points_2016.2 <- tm_shape(NDVI_vector_2016.2) + tm_dots(col="NDVI_2016.2", palette="YlGn", n=10) + tm_style("cobalt") + 
-  tm_legend(outside = TRUE, text.size = 1.2)
 
-# Display facets
-tmap_arrange(NDVI_points_2016.1,
-             NDVI_points_2016.2,
+# Display facets for both 2015 and 2016
+tmap_arrange(NDVI_points_2015.1,
+             NDVI_points_2016.1,
              ncol=2)
 
 # From raster to point 2017
