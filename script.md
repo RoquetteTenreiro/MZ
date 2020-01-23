@@ -88,7 +88,7 @@ knitr::opts_knit$set(root.dir = "C:/Users/Tomas R. Tenreiro/Desktop/Experimental
 
 ## 2 Historical remote sensing data
 
-### 1.1 Time-series analysis of vegetation indices
+### 2.1 Time-series analysis of vegetation indices
 
 This section uploads all input (remote sensing) material. In this particular case, we will work with satellite data (Landsat-8 and Sentinel-2), atmospherically corrected (and cloud cover < 4%), that was downloaded from EO-browser (https://apps.sentinel-hub.com/). The script considers imagery from five different growing seasons (i.e. 2015, 2016, 2017, 2018 and 2019). As done by Sallah et al. (2019), a time-series analysis of plot mean NDVI was conducted in order to estimate the three most determinant dates, i.e. emergence date, crop maximum canopy cover (CC_MAX) date, and the starting date of crop senescence. 
 
@@ -628,6 +628,10 @@ In order to explore spatial correlations between plant vigor and soil properties
 
 - Trombetta, A., Iacobellis, V., Tarantino, E., & Gentile, F. (2016). Calibration of the AquaCrop model for winter wheat using MODIS LAI images. Agricultural Water Management, 164, 304-316.
 
+### 2.2 Uploading and processing NDVI
+
+From this point we will work with the selected imagery and all data input steps as well as spatial operations will be briefly introduced.
+
 ```{r}
 # Date 2015 -1
 Red.2015.1 <- raster("SAT Imagery/Red_05.06.2015.tiff")
@@ -669,8 +673,6 @@ NIR.2019.1 <- raster("SAT Imagery/NIR_14.04.2019.tiff")
 Red.2019.2 <- raster("SAT Imagery/Red_27.04.2019.tiff")
 NIR.2019.2 <- raster("SAT Imagery/NIR_27.04.2019.tiff")
 ```
-
-### 2.2 Estimate NDVI 
 
 This section estimates NDVI considering that Landsat-8 satellite B4 corresponds to Red wave length and B5 to NIR wave length; Sentinel-2 satellite B4 corresponds to Red wave length and B8 to NIR wave length. Data is in raster format with a spatial resolution of 30x30m (Landsat-8) or 10x10m (Sentinel-2).
 
