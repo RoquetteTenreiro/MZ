@@ -90,13 +90,113 @@ knitr::opts_knit$set(root.dir = "C:/Users/Tomas R. Tenreiro/Desktop/Experimental
 
 ### 1.1 Time-series analysis of vegetation indices
 
-This section uploads all input material. In this particular case, we will work with satellite data (Landsat-8 and Sentinel-2), atmospherically corrected (and cloud cover < 4%), that was downloaded from EO-browser (https://apps.sentinel-hub.com/). The script considers imagery from five different growing seasons (i.e. 2015, 2016, 2017, 2018 and 2019). As done by by Sallah et al. (2019), a time-series analysis of plot mean NDVI was conducted in order to estimate the three most determinant dates, i.e. sowing date, crop maximum canopy cover date, and the starting date of crop senescence. 
+This section uploads all input (remote sensing) material. In this particular case, we will work with satellite data (Landsat-8 and Sentinel-2), atmospherically corrected (and cloud cover < 4%), that was downloaded from EO-browser (https://apps.sentinel-hub.com/). The script considers imagery from five different growing seasons (i.e. 2015, 2016, 2017, 2018 and 2019). As done by Sallah et al. (2019), a time-series analysis of plot mean NDVI was conducted in order to estimate the three most determinant dates, i.e. emergence date, crop maximum canopy cover (CC_MAX) date, and the starting date of crop senescence. 
 
 - Sallah, A. H. M., Tychon, B., Piccard, I., Gobin, A., Van Hoolst, R., Djaby, B., & Wellens, J. (2019). Batch-processing of AquaCrop plug-in for rainfed maize using satellite derived Fractional Vegetation Cover data. Agricultural water management, 217, 346-355.
 
 ```{r}
 
 # Time-series as proposed by Sallah et al., 2019 
+
+# Upload 2019 Satellite NDVI data
+R.2019.ts.1  <- raster("SAT Imagery/Time-series/Red.13.11.2018.tiff")
+R.2019.ts.2  <- raster("SAT Imagery/Time-series/Red.05.12.2018.tiff")
+R.2019.ts.3  <- raster("SAT Imagery/Time-series/Red.23.12.2018.tiff")
+R.2019.ts.4  <- raster("SAT Imagery/Time-series/Red.09.01.2019.tiff")
+R.2019.ts.5  <- raster("SAT Imagery/Time-series/Red.28.02.2019.tiff")
+R.2019.ts.6  <- raster("SAT Imagery/Time-series/Red.20.03.2019.tiff")
+R.2019.ts.7  <- raster("SAT Imagery/Time-series/Red.14.04.2019.tiff")
+R.2019.ts.8  <- raster("SAT Imagery/Time-series/Red.12.05.2019.tiff")
+R.2019.ts.9  <- raster("SAT Imagery/Time-series/Red.01.06.2019.tiff")
+
+N.2019.ts.1  <- raster("SAT Imagery/Time-series/NIR.13.11.2018.tiff")
+N.2019.ts.2  <- raster("SAT Imagery/Time-series/NIR.05.12.2018.tiff")
+N.2019.ts.3  <- raster("SAT Imagery/Time-series/NIR.23.12.2018.tiff")
+N.2019.ts.4  <- raster("SAT Imagery/Time-series/NIR.09.01.2019.tiff")
+N.2019.ts.5  <- raster("SAT Imagery/Time-series/NIR.28.02.2019.tiff")
+N.2019.ts.6  <- raster("SAT Imagery/Time-series/NIR.20.03.2019.tiff")
+N.2019.ts.7  <- raster("SAT Imagery/Time-series/NIR.14.04.2019.tiff")
+N.2019.ts.8  <- raster("SAT Imagery/Time-series/NIR.12.05.2019.tiff")
+N.2019.ts.9  <- raster("SAT Imagery/Time-series/NIR.01.06.2019.tiff")
+
+NDVI.ts.1 <- (N.2019.ts.1 - R.2019.ts.1) / (N.2019.ts.1 + R.2019.ts.1)
+NDVI.ts.2 <- (N.2019.ts.2 - R.2019.ts.2) / (N.2019.ts.2 + R.2019.ts.2)
+NDVI.ts.3 <- (N.2019.ts.3 - R.2019.ts.3) / (N.2019.ts.3 + R.2019.ts.3)
+NDVI.ts.4 <- (N.2019.ts.4 - R.2019.ts.4) / (N.2019.ts.4 + R.2019.ts.4)
+NDVI.ts.5 <- (N.2019.ts.5 - R.2019.ts.5) / (N.2019.ts.5 + R.2019.ts.5)
+NDVI.ts.6 <- (N.2019.ts.6 - R.2019.ts.6) / (N.2019.ts.6 + R.2019.ts.6)
+NDVI.ts.7 <- (N.2019.ts.7 - R.2019.ts.7) / (N.2019.ts.7 + R.2019.ts.7)
+NDVI.ts.8 <- (N.2019.ts.8 - R.2019.ts.8) / (N.2019.ts.8 + R.2019.ts.8)
+NDVI.ts.9 <- (N.2019.ts.9 - R.2019.ts.9) / (N.2019.ts.9 + R.2019.ts.9)
+
+# Mask 
+masked_2019.1 = mask(NDVI.ts.1, field_vector)
+masked_2019.2 = mask(NDVI.ts.2, field_vector)
+masked_2019.3 = mask(NDVI.ts.3, field_vector)
+masked_2019.4 = mask(NDVI.ts.4, field_vector)
+masked_2019.5 = mask(NDVI.ts.5, field_vector)
+masked_2019.6 = mask(NDVI.ts.6, field_vector)
+masked_2019.7 = mask(NDVI.ts.7, field_vector)
+masked_2019.8 = mask(NDVI.ts.8, field_vector)
+masked_2019.9 = mask(NDVI.ts.9, field_vector)
+
+# vectorize
+vector_2019.1 <- rasterToPoints(masked_2019.1, spatial = TRUE) %>% st_as_sf()
+vector_2019.2 <- rasterToPoints(masked_2019.2, spatial = TRUE) %>% st_as_sf()
+vector_2019.3 <- rasterToPoints(masked_2019.3, spatial = TRUE) %>% st_as_sf()
+vector_2019.4 <- rasterToPoints(masked_2019.4, spatial = TRUE) %>% st_as_sf()
+vector_2019.5 <- rasterToPoints(masked_2019.5, spatial = TRUE) %>% st_as_sf()
+vector_2019.6 <- rasterToPoints(masked_2019.6, spatial = TRUE) %>% st_as_sf()
+vector_2019.7 <- rasterToPoints(masked_2019.7, spatial = TRUE) %>% st_as_sf()
+vector_2019.8 <- rasterToPoints(masked_2019.8, spatial = TRUE) %>% st_as_sf()
+vector_2019.9 <- rasterToPoints(masked_2019.9, spatial = TRUE) %>% st_as_sf()
+
+# Get mean
+vector_2019.1$geometry <- NULL
+vector_2019.2$geometry <- NULL
+vector_2019.3$geometry <- NULL
+vector_2019.4$geometry <- NULL
+vector_2019.5$geometry <- NULL
+vector_2019.6$geometry <- NULL
+vector_2019.7$geometry <- NULL
+vector_2019.8$geometry <- NULL
+vector_2019.9$geometry <- NULL
+
+NDVI_1 <- mean(vector_2019.1$layer)
+NDVI_2 <- mean(vector_2019.2$layer)
+NDVI_3 <- mean(vector_2019.3$layer)
+NDVI_4 <- mean(vector_2019.4$layer)
+NDVI_5 <- mean(vector_2019.5$layer)
+NDVI_6 <- mean(vector_2019.6$layer)
+NDVI_7 <- mean(vector_2019.7$layer)
+NDVI_8 <- mean(vector_2019.8$layer)
+NDVI_9 <- mean(vector_2019.9$layer)
+
+# Time-series
+rm(time_series)
+time_series <- data.frame(matrix(ncol = 3, nrow = 9))
+colnames(time_series) <- c("NDVI_2019","Date","note")
+
+
+time_series$NDVI_2019 <- matrix(c(NDVI_1, NDVI_2, NDVI_3, NDVI_4, NDVI_5, NDVI_6,
+                         NDVI_7, NDVI_8, NDVI_9),ncol=1,byrow = TRUE)
+
+dates <- c("11/13/18", "12/05/18", "12/23/18", "01/09/19", "02/28/19","03/20/19", "04/10/19", "05/12/19", "06/01/19")
+b_dates <- as.Date(dates, "%m/%d/%y")
+time_series$Date <- b_dates
+
+time_series$note <- matrix(c("Emergence (13/11)", "", "", "", "", "",
+                         "CC_MAX (10/04)", "", ""),ncol=1,byrow = TRUE)
+
+g2 <- ggplot(time_series, aes(x = Date, y = NDVI_2019)) +
+  geom_text(aes(label=note), hjust = -0.1, angle = 0) +
+	geom_line(color='darkgreen', size=2, alpha=0.4, linetype=2) + geom_point(shape=21, color="black", fill="#69b3a2", size=6) +
+	scale_x_date(date_labels = "%m / %Y", date_breaks = "1 month") +
+	theme_classic() + ylim(0, 1) + xlim(as.Date(c('15/10/2018', '20/07/2019'), format="%d/%m/%Y")) +
+  geom_area(fill = "darkolivegreen2", alpha=0.4)
+
+###########################################
+###########################################
 
 # Upload 2018 Satellite NDVI data
 R.2018.ts.1  <- raster("SAT Imagery/Time-series/Red.26.10.2017.tiff")
@@ -202,106 +302,6 @@ g1 <- ggplot(time_series, aes(x = Date, y = NDVI_2018)) +
 	geom_line(color='darkgreen', size=2, alpha=0.4, linetype=2) + geom_point(shape=21, color="black", fill="#69b3a2", size=6) +
 	scale_x_date(date_labels = "%m / %Y", date_breaks = "1 month") +
 	theme_classic() + ylim(0, 1) + xlim(as.Date(c('15/10/2017', '20/07/2018'), format="%d/%m/%Y")) +
-  geom_area(fill = "darkolivegreen2", alpha=0.4)
-
-###########################################
-###########################################
-
-# Upload 2019 Satellite NDVI data
-R.2019.ts.1  <- raster("SAT Imagery/Time-series/Red.13.11.2018.tiff")
-R.2019.ts.2  <- raster("SAT Imagery/Time-series/Red.05.12.2018.tiff")
-R.2019.ts.3  <- raster("SAT Imagery/Time-series/Red.23.12.2018.tiff")
-R.2019.ts.4  <- raster("SAT Imagery/Time-series/Red.09.01.2019.tiff")
-R.2019.ts.5  <- raster("SAT Imagery/Time-series/Red.28.02.2019.tiff")
-R.2019.ts.6  <- raster("SAT Imagery/Time-series/Red.20.03.2019.tiff")
-R.2019.ts.7  <- raster("SAT Imagery/Time-series/Red.14.04.2019.tiff")
-R.2019.ts.8  <- raster("SAT Imagery/Time-series/Red.12.05.2019.tiff")
-R.2019.ts.9  <- raster("SAT Imagery/Time-series/Red.01.06.2019.tiff")
-
-N.2019.ts.1  <- raster("SAT Imagery/Time-series/NIR.13.11.2018.tiff")
-N.2019.ts.2  <- raster("SAT Imagery/Time-series/NIR.05.12.2018.tiff")
-N.2019.ts.3  <- raster("SAT Imagery/Time-series/NIR.23.12.2018.tiff")
-N.2019.ts.4  <- raster("SAT Imagery/Time-series/NIR.09.01.2019.tiff")
-N.2019.ts.5  <- raster("SAT Imagery/Time-series/NIR.28.02.2019.tiff")
-N.2019.ts.6  <- raster("SAT Imagery/Time-series/NIR.20.03.2019.tiff")
-N.2019.ts.7  <- raster("SAT Imagery/Time-series/NIR.14.04.2019.tiff")
-N.2019.ts.8  <- raster("SAT Imagery/Time-series/NIR.12.05.2019.tiff")
-N.2019.ts.9  <- raster("SAT Imagery/Time-series/NIR.01.06.2019.tiff")
-
-NDVI.ts.1 <- (N.2019.ts.1 - R.2019.ts.1) / (N.2019.ts.1 + R.2019.ts.1)
-NDVI.ts.2 <- (N.2019.ts.2 - R.2019.ts.2) / (N.2019.ts.2 + R.2019.ts.2)
-NDVI.ts.3 <- (N.2019.ts.3 - R.2019.ts.3) / (N.2019.ts.3 + R.2019.ts.3)
-NDVI.ts.4 <- (N.2019.ts.4 - R.2019.ts.4) / (N.2019.ts.4 + R.2019.ts.4)
-NDVI.ts.5 <- (N.2019.ts.5 - R.2019.ts.5) / (N.2019.ts.5 + R.2019.ts.5)
-NDVI.ts.6 <- (N.2019.ts.6 - R.2019.ts.6) / (N.2019.ts.6 + R.2019.ts.6)
-NDVI.ts.7 <- (N.2019.ts.7 - R.2019.ts.7) / (N.2019.ts.7 + R.2019.ts.7)
-NDVI.ts.8 <- (N.2019.ts.8 - R.2019.ts.8) / (N.2019.ts.8 + R.2019.ts.8)
-NDVI.ts.9 <- (N.2019.ts.9 - R.2019.ts.9) / (N.2019.ts.9 + R.2019.ts.9)
-
-# Mask 
-masked_2019.1 = mask(NDVI.ts.1, field_vector)
-masked_2019.2 = mask(NDVI.ts.2, field_vector)
-masked_2019.3 = mask(NDVI.ts.3, field_vector)
-masked_2019.4 = mask(NDVI.ts.4, field_vector)
-masked_2019.5 = mask(NDVI.ts.5, field_vector)
-masked_2019.6 = mask(NDVI.ts.6, field_vector)
-masked_2019.7 = mask(NDVI.ts.7, field_vector)
-masked_2019.8 = mask(NDVI.ts.8, field_vector)
-masked_2019.9 = mask(NDVI.ts.9, field_vector)
-
-# vectorize
-vector_2019.1 <- rasterToPoints(masked_2019.1, spatial = TRUE) %>% st_as_sf()
-vector_2019.2 <- rasterToPoints(masked_2019.2, spatial = TRUE) %>% st_as_sf()
-vector_2019.3 <- rasterToPoints(masked_2019.3, spatial = TRUE) %>% st_as_sf()
-vector_2019.4 <- rasterToPoints(masked_2019.4, spatial = TRUE) %>% st_as_sf()
-vector_2019.5 <- rasterToPoints(masked_2019.5, spatial = TRUE) %>% st_as_sf()
-vector_2019.6 <- rasterToPoints(masked_2019.6, spatial = TRUE) %>% st_as_sf()
-vector_2019.7 <- rasterToPoints(masked_2019.7, spatial = TRUE) %>% st_as_sf()
-vector_2019.8 <- rasterToPoints(masked_2019.8, spatial = TRUE) %>% st_as_sf()
-vector_2019.9 <- rasterToPoints(masked_2019.9, spatial = TRUE) %>% st_as_sf()
-
-# Get mean
-vector_2019.1$geometry <- NULL
-vector_2019.2$geometry <- NULL
-vector_2019.3$geometry <- NULL
-vector_2019.4$geometry <- NULL
-vector_2019.5$geometry <- NULL
-vector_2019.6$geometry <- NULL
-vector_2019.7$geometry <- NULL
-vector_2019.8$geometry <- NULL
-vector_2019.9$geometry <- NULL
-
-NDVI_1 <- mean(vector_2019.1$layer)
-NDVI_2 <- mean(vector_2019.2$layer)
-NDVI_3 <- mean(vector_2019.3$layer)
-NDVI_4 <- mean(vector_2019.4$layer)
-NDVI_5 <- mean(vector_2019.5$layer)
-NDVI_6 <- mean(vector_2019.6$layer)
-NDVI_7 <- mean(vector_2019.7$layer)
-NDVI_8 <- mean(vector_2019.8$layer)
-NDVI_9 <- mean(vector_2019.9$layer)
-
-# Time-series
-rm(time_series)
-time_series <- data.frame(matrix(ncol = 3, nrow = 9))
-colnames(time_series) <- c("NDVI_2019","Date","note")
-
-
-time_series$NDVI_2019 <- matrix(c(NDVI_1, NDVI_2, NDVI_3, NDVI_4, NDVI_5, NDVI_6,
-                         NDVI_7, NDVI_8, NDVI_9),ncol=1,byrow = TRUE)
-
-dates <- c("11/13/18", "12/05/18", "12/23/18", "01/09/19", "02/28/19","03/20/19", "04/10/19", "05/12/19", "06/01/19")
-b_dates <- as.Date(dates, "%m/%d/%y")
-time_series$Date <- b_dates
-
-time_series$note <- matrix(c("Emergence (13/11)", "", "", "", "", "",
-                         "CC_MAX (10/04)", "", ""),ncol=1,byrow = TRUE)
-
-g2 <- ggplot(time_series, aes(x = Date, y = NDVI_2019)) +
-  geom_text(aes(label=note), hjust = -0.1, angle = 0) +
-	geom_line(color='darkgreen', size=2, alpha=0.4, linetype=2) + geom_point(shape=21, color="black", fill="#69b3a2", size=6) +
-	scale_x_date(date_labels = "%m / %Y", date_breaks = "1 month") +
-	theme_classic() + ylim(0, 1) + xlim(as.Date(c('15/10/2018', '20/07/2019'), format="%d/%m/%Y")) +
   geom_area(fill = "darkolivegreen2", alpha=0.4)
 
 ###########################################
@@ -612,18 +612,22 @@ grid.arrange(g5, g4, g3, g1, g2, ncol = 1, nrow = 5)
 ```
 ![Image description](TS.jpg)
 
+In order to explore spatial correlations between plant vigor and soil properties under rainfed conditions, we focused on late phenological stages before crop senescence. According to relations between phenology, LAI and time after emergence reported by Tesfamariam et al. (2010) for canola, Trombetta et al. (2016) for wheat, and Todorovic et al. (2009) for sunflower, we assumed that flowering and NDVI peak tend to be partially overlaped. The two (in some cases only one due to lack of cloud free images) consecutive images taken imediatly after flowering stage were selected for each year. 2015 and 2017 imagery corresponds to a sunflower crop, 2016 and 2018 to a winter wheat crop and 2019 imagery corresponds to a canola crop. In this regard, the following table synthesizes all important information that we derived from this time-series analysis.
 
-In order to explore spatial correlation between plant vigor and soil properties under rainfed conditions, we focused on late phenological stages before crop senescence. The two consecutive images taken imediatly after flowering stage were selected for each year. 2015 and 2017 imagery corresponds to a sunflower crop, 2016 and 2018 to a winter wheat crop and 2019 imagery corresponds to a canola crop. 
+| Year | Crop             | Emergence  | Max_CC     | Selected imagery  | Satellite   | Spatial Resolution |
+|------|------------------|------------|------------|-------------------|-------------|--------------------|
+| 2015 | Sunflower        | 18/04/2015 | 20/05/2015 |     20th May      | Landsat-8   | 30x30 m            |
+| 2016 | Wheat (durum)    | 25/11/2015 | 03/03/2016 |     3rd March     | Landsat-8   | 30x30 m            |
+| 2017 | Sunflower        | 16/04/2017 | 22/05/2017 |22th May + 11th June| Sentinel-2 | 30x30 m            |
+| 2018 | Wheat (durum)    | 18/12/2017 | 28/03/2018 |28th March + 14th April| Sentinel-2 | 10x10 m        |
+| 2019 | Canola           | 13/11/2018 | 14/04/2019 |14th April + 12th May| Sentinel-2   | 10x10 m        |
 
 
+- Tesfamariam, E. H., Annandale, J. G., & Steyn, J. M. (2010). Water stress effects on winter canola growth and yield. Agronomy Journal, 102(2), 658-666.
 
-| Year | Crop             | Date 1     | Date 2     | Satellite   | Spatial Resolution |
-|------|------------------|------------|------------|-------------|---------------|
-| 2015 | Sunflower        | 05/6/2015  | 07/7/2015  | Landsat-8   | 30x30 m       |
-| 2016 | Wheat (durum)    | 07/6/2016  | 23/6/2016  | Landsat-8   | 30x30 m       |
-| 2017 | Sunflower        | 10/6/2017  | 26/6/2017  | Landsat-8   | 30x30 m       |
-| 2018 | Wheat (durum)    | 22/5/2018  | 03/6/2018  | Sentinel-2  | 10x10 m       |
-| 2019 | Canola           | 14/4/2019  | 27/4/2019  | Sentinel-2  | 10x10 m       |
+- Todorovic, M., Albrizio, R., Zivotic, L., Saab, M. T. A., Stöckle, C., & Steduto, P. (2009). Assessment of AquaCrop, CropSyst, and WOFOST models in the simulation of sunflower growth under different water regimes. Agronomy Journal, 101(3), 509-521.
+
+- Trombetta, A., Iacobellis, V., Tarantino, E., & Gentile, F. (2016). Calibration of the AquaCrop model for winter wheat using MODIS LAI images. Agricultural Water Management, 164, 304-316.
 
 ```{r}
 # Date 2015 -1
