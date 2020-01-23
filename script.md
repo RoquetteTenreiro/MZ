@@ -95,7 +95,6 @@ This section uploads all input (remote sensing) material. In this particular cas
 - Sallah, A. H. M., Tychon, B., Piccard, I., Gobin, A., Van Hoolst, R., Djaby, B., & Wellens, J. (2019). Batch-processing of AquaCrop plug-in for rainfed maize using satellite derived Fractional Vegetation Cover data. Agricultural water management, 217, 346-355.
 
 ```{r}
-
 # Time-series as proposed by Sallah et al., 2019 
 
 # Upload 2019 Satellite NDVI data
