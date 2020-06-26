@@ -1,0 +1,132 @@
+## Boosted regression tree (BRT) algorithm
+
+```{r}
+
+install.packages("gbm")
+library(gbm)
+install.packages("vip")
+library(vip)
+
+rm(gbm)
+gbm <- mergedata[c(10:13,16:18,25:29)]
+gbm$geometry <- NULL
+
+gbm.19 <- gbm[c(1:8)]
+gbm.18 <- gbm[c(1:7,9)]
+gbm.17 <- gbm[c(1:7,10)]
+gbm.16 <- gbm[c(1:7,11)]
+gbm.15 <- gbm[c(1:7,12)]
+
+names(gbm.19)[names(gbm.19) == "Yield_2019"] <- "y.19"
+names(gbm.18)[names(gbm.18) == "Yield_2018"] <- "y.18"
+names(gbm.17)[names(gbm.17) == "Yield_2017"] <- "y.17"
+names(gbm.16)[names(gbm.16) == "Yield_2016"] <- "y.16"
+names(gbm.15)[names(gbm.15) == "Yield_2015"] <- "y.15"
+
+# Simulate training data
+set.seed(101)  # for reproducibility
+trn.19 <- gbm.19  # dataframe
+trn.18 <- gbm.18
+trn.17 <- gbm.17
+trn.16 <- gbm.16
+trn.15 <- gbm.15
+
+tibble::as.tibble(trn.19)
+tibble::as.tibble(trn.18)
+tibble::as.tibble(trn.17)
+tibble::as.tibble(trn.16)
+tibble::as.tibble(trn.15)
+
+# Load required packages
+install.packages("xgboost")
+install.packages("ranger")
+install.packages("Ckmeans.1d.dp")
+library(xgboost)  # for fitting GBMs
+library(ranger)   # for fitting random forests
+library(rpart)    # for fitting CART-like decision trees
+library(Ckmeans.1d.dp)
+
+# Fit a single regression tree
+tree.19 <- rpart(y.19 ~ ., data = trn.19)
+tree.18 <- rpart(y.18 ~ ., data = trn.18)
+tree.17 <- rpart(y.17 ~ ., data = trn.17)
+tree.16 <- rpart(y.16 ~ ., data = trn.16)
+tree.15 <- rpart(y.15 ~ ., data = trn.15)
+
+# Fit a random forest
+set.seed(101)
+rfo.19 <- ranger(y.19 ~ ., data = trn.19, importance = "impurity")
+rfo.18 <- ranger(y.18 ~ ., data = trn.18, importance = "impurity")
+rfo.17 <- ranger(y.17 ~ ., data = trn.17, importance = "impurity")
+rfo.16 <- ranger(y.16 ~ ., data = trn.16, importance = "impurity")
+rfo.15 <- ranger(y.15 ~ ., data = trn.15, importance = "impurity")
+
+# Fit a GBM
+set.seed(102)
+bst.19 <- xgboost(
+  data = data.matrix(subset(trn.19, select = -y.19)),
+  label = trn.19$y.19, 
+  objective = "reg:linear",
+  nrounds = 100, 
+  max_depth = 5, 
+  eta = 0.3,
+  verbose = 0  # suppress printing
+)
+set.seed(102)
+bst.18 <- xgboost(
+  data = data.matrix(subset(trn.18, select = -y.18)),
+  label = trn.18$y.18, 
+  objective = "reg:linear",
+  nrounds = 100, 
+  max_depth = 5, 
+  eta = 0.3,
+  verbose = 0  # suppress printing
+)
+set.seed(102)
+bst.17 <- xgboost(
+  data = data.matrix(subset(trn.17, select = -y.17)),
+  label = trn.17$y.17, 
+  objective = "reg:linear",
+  nrounds = 100, 
+  max_depth = 5, 
+  eta = 0.3,
+  verbose = 0  # suppress printing
+)
+set.seed(102)
+bst.16 <- xgboost(
+  data = data.matrix(subset(trn.16, select = -y.16)),
+  label = trn.16$y.16, 
+  objective = "reg:linear",
+  nrounds = 100, 
+  max_depth = 5, 
+  eta = 0.3,
+  verbose = 0  # suppress printing
+)
+set.seed(102)
+bst.15 <- xgboost(
+  data = data.matrix(subset(trn.15, select = -y.15)),
+  label = trn.15$y.15, 
+  objective = "reg:linear",
+  nrounds = 100, 
+  max_depth = 5, 
+  eta = 0.3,
+  verbose = 0  # suppress printing
+)
+
+
+# VI plot for GMB for 2019
+(vi_bst.19 <- xgb.importance(model = bst.19))
+xgb.ggplot.importance(vi_bst.19)
+# VI plot for GMB for 2018
+(vi_bst.18 <- xgb.importance(model = bst.18))
+xgb.ggplot.importance(vi_bst.18)
+# VI plot for GMB for 2017
+(vi_bst.17 <- xgb.importance(model = bst.17))
+xgb.ggplot.importance(vi_bst.17)
+# VI plot for GMB for 2016
+(vi_bst.16 <- xgb.importance(model = bst.16))
+xgb.ggplot.importance(vi_bst.16)
+# VI plot for GMB for 2015
+(vi_bst.15 <- xgb.importance(model = bst.15))
+xgb.ggplot.importance(vi_bst.15)
+```
